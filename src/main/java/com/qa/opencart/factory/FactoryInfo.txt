@@ -1,0 +1,4 @@
+--> All the factory classes  (classes providing some configuration details)
+      should be written under the "factory " package. The factory  package
+      for an opencart project could be named as com.qa.opencart.Factory.
+      Also, all the factory packages will be created under src/main/java only.

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<!-- - There are following problems when performing parallel execution of 
+	tests using multiple threads: 
+	1. Let's say we have defined a significant thread-count and 
+	test classes with multiple test cases to run. Also, lets us assume that 
+	one test class has only 10 tests and other test class has 50 tests. So,
+	test class having only 10 tests and it's assigned thread will be running first (because it has less
+	number of tests) and the one with 50 tests and it's assigned thread after. 
+	In this case there are chances that the test results for the 
+	class having 50 tests will override the test results for the class having 
+	only 10 tests , in the test report the we create at the end of each test 
+	execution. Because the one with 50 tests will be completing later and the 
+	test report may contain only the data for the class with 50 tests which is a DATA LOSS 
+	for the class with only 10 tests. So, OVERRIDDEN 
+	test reports could be problem when the number of test cases and thread-count is LARGE.
+	
+	2.  To understand the second problem let us assume we have defined a large number of thread-count
+	(say, 30-40 threads) and we have triggered all our tests at once using runner which has
+	activated all threads in the execution. If 40 threads are taken up in an execution it means
+	that 40 WebDriver instances will be created at the run time. Now, there are chances that 
+	some of driver instances clash or disturb the execution of other driver instances causing 
+	the respective threads to halt or completely stop the execution. This thread-stop
+	state is also called DEADLOCK problem in multi-threading or parallel execution environment.
+	
+	So, to overcome these 2 problems we use a feature/class of JAVA called THREADLOCAL
+	which was introduced first in JDK 1.8. So, we can use this concept JDK 1.8 onwards.
+	-->
+
+
+<suite name="Open Cart App Test Regression Suite"  thread-count="4" parallel="tests"  verbose="3">
+	
+	<!-- 
+	1. If we don't want to add listeners in the testNG runner file, we could also
+	add them in the test classes (see LoginPageTest.java for usage) 
+	
+	2. But the DISADVANTAGE of adding listeners at the respective class level
+	is we have to add listener in every class if we have to execute
+	multiple test classes as part of a test suite at the same time. -->
+	<listeners>
+		<listener class-name="com.qa.opencart.listeners.ExtentReportListener"/>
+		<listener class-name="com.qa.opencart.listeners.TestAllureListener"/>
+		<!-- Providing Retry Listener at the suite level (For all tests at once) -->
+		<listener class-name="com.qa.opencart.listeners.AnnotationTransformer"/>
+	</listeners>
+
+	<test name="Login Page Test">
+		<classes>
+			<class name="com.qa.opencart.tests.LoginPageTest" />
+		</classes>
+	</test>
+
+	<!-- <test name="Accounts Page Test">
+		<classes>
+			<class name="com.qa.opencart.tests.AccountsPageTest" />
+		</classes>
+	</test>
+
+	<test name="ProductInfo Page Test">
+		<classes>
+			<class name="com.qa.opencart.tests.ProductInfoTest" />
+		</classes>
+	</test> -->
+
+	<!-- <test name="Register Page Test">
+		<classes>
+			<class name="com.qa.opencart.tests.RegisterPageTest" />
+		</classes>
+	</test> -->
+
+</suite>

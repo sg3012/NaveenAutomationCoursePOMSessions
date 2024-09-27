@@ -1,0 +1,5 @@
+---> We store configuration related information or environment variables in our config.properties
+        file. The variables could be browsername, URL, Environment, Headless value, user name,
+        password etc.
+---> DO NOT Give any negative test data like incorrect user name, password in the properties file because
+        it is only meant to store the configuration data which should be correct.

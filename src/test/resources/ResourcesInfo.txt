@@ -1,0 +1,8 @@
+SRC/TEST/RESOURCES folder is meant to hold only non-java files like
+testrunners which are xml files, test data files which are excel files or xlsx files 
+, configuration files which is a properties file (config.properties) etc.
+
+
+We will not create any package inside src/test/resources folder because packages are meant 
+to be created to keep JAVA files/classes but src/test/resources is meant to contain
+non-java files like testRunners which are xml files etc.

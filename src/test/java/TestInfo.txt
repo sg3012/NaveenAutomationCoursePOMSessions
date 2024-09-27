@@ -1,0 +1,8 @@
+- All the test classes having some test cases actually written in them
+  i.e. if there are any @Test annotations in the classes then those
+  classes should be written in com.qa.<project-name>.tests package 
+  under src/test/java package. Else, the class names ending with ......Test.java 
+  doesn't necessarily mean that they will be written in com.qa.<project-name>.tests package 
+  under src/test/java. They should be written in separate packages under src/test/java. 
+  For e.g. BaseTest.java's name ends in Test.java but it is written in com.qa.<project-name>.base 
+  package under src/test/java because it doesn't have any @Test annotations.

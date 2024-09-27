@@ -1,0 +1,46 @@
+- There are 2 sites in the Git world:
+1. The local site : Which is the local machine having the code base on which you are working
+2. The remote site : Which is the remote website (GitHub.com) having the code base which push to
+and pull from.
+
+- The local site is also called Workspace or working directory. Meaning the folder
+  in which the whole project exists.
+
+- [RECOMMENDED] The number of repositories on the remote site should be equal to the 
+  number of projects on the local site i.e., if we have 2 projects for different products with 
+  different code base in our local machines then we should have 2 Repositories on the Remote
+  site for better code maintenance
+  
+  - The dot in the .git folder in any project means it is a hidden folder. In fact, dot
+  just before the folder name means it is a hidden folder in most of the OS 
+  
+  - The whole project code is in the working directory ( the folder in which the whole
+     project exists) until you add that code to the staging/index area using Git add
+     command
+    
+   - The project comes under LOCAL REPO whenever you commit the code in your working
+   directory.
+	
+  - There are following statuses git uses to keep track of files:
+     --> UNTRACKED - These are the files which are never committed in any of the branches
+     and added in the staging area ever and pushed to github from any of the branches ever.
+     
+     --> TRACKED: These are the files which are added to the stage area but never committed and pushed.
+  
+  - We ignore the following files / folders to be pushed to the source code mgmnt. tool
+  like Git by putting them in .gitignore file:
+  	1. Test output folder created by testNG
+  	2. allure-results folder having allure reports JSON format created by Allure Reports library
+  	3. Screenshots folder created after running different test runs.
+  	4. build folder created by Maven
+  	5. Reports folder created by Extent Reports etc.
+  	6. Some particular files/folders created by some specific text editors like
+  	   .settings folder by Eclipse, out/ folder created by IntelliJ
+  	7. Some particular files created by some OS like .DS_Store created by MacOSX 
+  	8. All the JAR files / dependencies for different libraries
+  	
+  - Following are the syntaxes we use to move files and folders in .gitignore file:
+    ---> To move any specific file with full file name (including extension): <filename.extension>
+    ---> To move any file with a very specific file extension : <*.fileextension>, here * means any
+           file having the fileextension
+    ---> To move specific folder: <foldername/>

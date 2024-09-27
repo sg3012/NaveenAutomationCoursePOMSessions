@@ -1,0 +1,57 @@
+- POM stands for Page Object Model. POM is a design pattern
+   not the actual Framework.
+   
+ - Page classes are only meant to write Page locators, page actions. Never
+    write your actual tests / assertions in the Page classes. It is not recommended. 
+    
+ - Why Do we need Cloud infrastructure to run our tests remotely when
+    we could run them on our local?
+    Ans: Due to following reasons:
+ 1. Let's say multiple automation engineers are working on different
+      pages / modules to automate them. Now, if their manager wants a combined
+      report of all the tests in a single report then they couldn't do it. All they
+      have to do is send their corresponding reports by email or they will
+      sit together and create a single report manually which will consume a lot
+      of time. So, that's why we need Jenkins or some similar tool where all the source
+      code from all the automation engineers will be there in a single repo which can
+      trigger all the required tests in a single go simultaneously.
+     
+ 2. Let's say if customer wants us to execute all the tests on 2 or 3 browser versions
+        then we cannot do that in our local executions simultaneously because
+        we can have only single browser at a time on our local machine. So, if
+        we have to run all tests on different browser versions we have to uinstall and
+        and install different versions repeatedly. To void this we will setup different
+        browser versions on different cloud machines remotely and run them simultaneously.
+       
+ 3. Let's say if we are running all the tests on our local machine in parallel then each
+    time a test runs a browser instance opens which will become a hurdle if we want to
+    perform a different task on the machine in parallel along with running the automation scripts.
+    That is why we need a separate execution environment so that we could run our automation
+    scripts on different machines and do some other tasks on our local machine in parallel.
+    
+  - What kind of Framework you are using for your project?
+     Ans: It is a Hybrid framework using the following:
+             --> Data driven approach to execute some tests
+             --> Page Object Model design pattern to arrange the test code.
+             --> Some other utilities for purposes like reading the data from excel,
+                    generic utilities for some common page actions etc.
+                    
+ - So what is a Framework actually?
+   Ans: Framework is basically segregation of the source code into different
+   components where each component has it's own functionality and they are interlinked
+   and communicating with each other. For e.g. : Selenium is a web-automation framework,
+   TestNG is a unit testing framework and the frameworks that we develop for our
+   projects are a kind of test automation framework where we automate the user actions
+   on web browsers + validate those actions.
+   
+   [IMPORTANT]: Every framework should follow Single Responsibility Principle [SRP]
+   which says that every source code file should only contain the 
+   functionality keeping which in mind the class/file was actually created. For e.g.  
+   If we have created LoginPage.java then it should contain the code related to the
+   user actions on the Login page only. It shouldn't contain any assertion code (validations),
+   code related to other pages etc.
+   
+   - Always use the following nomenclature for naming the packages in your framework:
+     --> com.qa.<Project-name>.<LayerName> 
+            For e.g. : For creating page layer package in an OpenCart Project use the name as 
+            com.qa.opencart.pages
