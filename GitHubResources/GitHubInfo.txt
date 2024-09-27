@@ -20,12 +20,24 @@ and pull from.
     
    - The project comes under LOCAL REPO whenever you commit the code in your working
    directory.
+   
+   - Whenever you push a code to any branch on remote Git creates a branch with the same
+   name in your local machine too for the tracking purpose
 	
   - There are following statuses git uses to keep track of files:
      --> UNTRACKED - These are the files which are never committed in any of the branches
      and added in the staging area ever and pushed to github from any of the branches ever.
      
      --> TRACKED: These are the files which are added to the stage area but never committed and pushed.
+     
+     --> MODIFIED: These are the files which have already been pushed to the remote repo to the github once
+     but now some changes have been made in the working directory in the local machine. 
+     
+     --> REMEMBER, when you have already added the entire code base of your project
+     once in the staging area using "git add . " don't use the same command when
+     you have just modified few files in your local and want to push that. If you use
+     the same add command again and again even while pushing a few files it will
+     add the entire code base again and again in the staging area which is not good.
   
   - We ignore the following files / folders to be pushed to the source code mgmnt. tool
   like Git by putting them in .gitignore file:
