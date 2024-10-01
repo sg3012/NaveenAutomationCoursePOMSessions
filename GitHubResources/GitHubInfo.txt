@@ -39,13 +39,38 @@ and pull from.
      the same add command again and again even while pushing a few files it will
      add the entire code base again and again in the staging area which is not good.
      
+     --> The latest commit in the whole commit list in any of the branch is called the HEAD of the
+     branch
+     
+     --> It is not recommended to merge the local branches into the master because
+     what if the PR raised for the local branch is not approved and you merge the
+     un-approved code into the master. This will make maintenance of the master
+     branch very difficult as we may have remove the unwanted code from master
+     that could be very time taking. This is called polluting your local master with
+     unwanted code.
+     
      --> git log: This command is used to get the list of all commits till now in the local repo. 
      
      --> git log --oneline: This command is used get very brief details of all the commits
      done so far in the local repo in only one line
      
-     --> The latest commit in the whole commit list in any of the branch is called the HEAD of the
-     branch
+     --> HOW PROVIDE REVIEW COMMENTS IN A PULL REQUEST:
+           1. Login to github account.
+           2. Go to Repositories tab.
+           3. Go to the Repository you have the pull request for.
+           4. Go to the pull requests tab under that repository.
+           5. Click the pull request link you want to provide the review comments for from the list.
+           6. On the details page click the files changed tab.
+           7. Click the + icon in the Green area which shows the new changes against the line of code which you want.
+               to make changes in.
+           8. Write a comment in the text area for leaving comment.
+           9. Click add single comment button and your comment will be added.
+           
+      --> There could be 3 actions while Reviewing a PR in Github:
+            1. Comment : Providing an overall comment(s) to the PR without explicitly approving or rejecting it. 
+                This means the PR status will remain Open.
+            2. Approve : Changing the PR status to Approved explicitly.
+            3. Request changes : Changing the PR status to Reject explicitly.
   
   - We ignore the following files / folders to be pushed to the source code mgmnt. tool
   like Git by putting them in .gitignore file:
