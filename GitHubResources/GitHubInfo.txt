@@ -54,6 +54,43 @@ and pull from.
      --> git log --oneline: This command is used get very brief details of all the commits
      done so far in the local repo in only one line
      
+     --> git shortlog [IMPORTANT]: This command gives the details of how many
+     contributors are there in the project and how many commits have been done
+     by each contributor to all the branches.
+     
+     --> git log --oneline --reverse: To get the commit history/log in one line
+     per commit and in ascending order
+     
+     --> git show <commit-ID> :  To get the details of what happened with a particular commit ID.
+     
+     --> git show HEAD : what code changes happened as part of the latest commit in the project on that particular branch
+     
+     --> git show HEAD:<file-path> : what code changes happened in a particular  file as part of the latest commit in 
+     the project on that particular branch
+     
+     --> git log -<number-of-logs>: shows only the number of logs as specified by <number-of-logs>. For e.g.
+     git log -3 will show only last 3 logs.
+     
+     --> git log --author="<author-name>" : shows the commit log for a particular author defined by <author-name>
+     
+     --> git log --before="<date in yyyy-mm-dd format>": shows the commit log from the date provided and before.  
+     
+     --> git log <file-path>: shows the commit history/log for the file path specified.
+     
+     --> git log <commit ID1..commitIDn>: shows the commit log between a commit range ( say between commit 1 to commit 4). 
+     Remember only 2 dots MUST be present between the commit range.
+     
+     --> git log --stat: gives the commit history in the entire project on each branch with some details on
+     the files changed in each commit like number of insertions, deletions, number of files changed etc.
+     
+     --> git branch : how many branches in my local along with the branch name(s).
+     
+     --> git branch -r: how many branches in the remote site along with the branch name(s).
+     
+     --> git push -d <remote-name> <remote-branch-name> : delete a branch from remote site.
+     
+     --> 
+     
      --> HOW PROVIDE REVIEW COMMENTS IN A PULL REQUEST:
            1. Login to github account.
            2. Go to Repositories tab.
@@ -89,3 +126,40 @@ and pull from.
     ---> To move any file with a very specific file extension : <*.fileextension>, here * means any
            file having the fileextension
     ---> To move specific folder: <foldername/>
+    
+    - [IMPORTANT-INTERVIEW] : What is the local branching process or remote branching process
+      in your company or PR process in your team?
+      ---> Ans: I am the developer in the project here is the PR process in the team:
+      We have a remote repository setup in the project on Github. Whenever a new or
+      existing developer works on the project the new developer takes the clone of the whole project
+      with latest master branch in his local and the existing developer takes the latest code from the remote master into
+      the local master branch.  At this point the code version in the local and remote master branches is the same ( say v 1.0 ).
+      Now, when I have to work on a new feature I will switch to the local master branch
+      with latest code and cut the new feature branch from it. After cutting the new feature branch I checkout to that branch
+      and start working on the feature. When I am done working for the feature in the feature branch my working directory
+      ( the folder in which the files are ) is pointing to the local feature branch. After the work is done on local feature branch
+      I add all the code base in my local feature branch to the staging area and then commit the code to the local repo.
+      Then, I push my feature branch in the local to the remote site (GitHub) on the same feature branch. After pushing the code
+      to remote I raise a PR using GitHUB UI for review for my TL. Once the PR is approved by my TL, only then the feature
+      branch gets merged to the master by TL on the remote site. At this point the code version at the remote master branch
+      is different than my local master branch ( say v 2.0 ). So, I take the pull of the latest version of the master branch code
+      from remote to the local branch, to stay up to the date with the latest master code on remote. ( see the image 
+      GitHubPRProcess_ShortAnswer.PNG at the project root folder for MORE INFO). 
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
