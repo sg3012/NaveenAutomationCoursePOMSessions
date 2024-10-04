@@ -88,8 +88,15 @@ and pull from.
      --> git branch -r: how many branches in the remote site along with the branch name(s).
      
      --> git push -d <remote-name> <remote-branch-name> : delete a branch from remote site.
+   
+     --> git push -d <branch-name>: delete a local branch if there are no unmerged changes in
+     the branch left due to some merge conflicts or some other reasons.
      
-     --> 
+     --> git push -D <branch-name>: delete a local branch forcefully even if there are 
+     unmerged changes in the branch left. (Remember UPPERCASE D is used
+     in this command).
+     
+     --> git merge <branch-name> : to merge a local branch into another local branch
      
      --> HOW PROVIDE REVIEW COMMENTS IN A PULL REQUEST:
            1. Login to github account.

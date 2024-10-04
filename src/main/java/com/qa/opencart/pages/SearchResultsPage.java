@@ -25,7 +25,7 @@ public class SearchResultsPage {
 	public ProductInfoPage selectProduct(String productName) {
 		eleUtil.clickElementWhenReady(By.linkText(productName), AppConstants.MEDIUM_TIME_OUT); 
 		// We are creating the dynamic locator as above because
-		// the product name displayed on the tile wil
+		// the product name displayed on the tile will
 		// be different for every product in the search
 		// result. So, we shouldn't create locator
 		// at the class level using hard-coded product
