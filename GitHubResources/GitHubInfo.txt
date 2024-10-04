@@ -98,6 +98,14 @@ and pull from.
      
      --> git merge <branch-name> : to merge a local branch into another local branch
      
+     --> git tag <tag-name>: to add a tag to the latest commit ( changes ) in a local branch
+     
+     --> git push <remote-name> <tag-name>: to push the created TAG on a local branch to the
+     same remote branch.
+     NOTE: While pushing a tag along with the code changes to remote branch it is not mandatory
+     to specify the name of the remote branch in the command. Git will automatically push the code
+     to the same remote branch as the local branch.
+     
      --> HOW PROVIDE REVIEW COMMENTS IN A PULL REQUEST:
            1. Login to github account.
            2. Go to Repositories tab.
