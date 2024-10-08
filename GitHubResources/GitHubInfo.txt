@@ -89,12 +89,14 @@ and pull from.
      
      --> git push -d <remote-name> <remote-branch-name> : delete a branch from remote site.
    
-     --> git push -d <branch-name>: delete a local branch if there are no unmerged changes in
+     --> git branch -d <branch-name>: delete a local branch if there are no unmerged changes in
      the branch left due to some merge conflicts or some other reasons.
      
-     --> git push -D <branch-name>: delete a local branch forcefully even if there are 
+     --> git branch -D <branch-name>: delete a local branch forcefully even if there are 
      unmerged changes in the branch left. (Remember UPPERCASE D is used
      in this command).
+     NOTE: While deleting a local branch keep in mind to switch to some branch other than
+     the one you want to delete. Otherwise, you will not be able to delete it.
      
      --> git merge <branch-name> : to merge a local branch into another local branch
      
@@ -105,6 +107,42 @@ and pull from.
      NOTE: While pushing a tag along with the code changes to remote branch it is not mandatory
      to specify the name of the remote branch in the command. Git will automatically push the code
      to the same remote branch as the local branch.
+     
+     --> git merge <remote-name>/<remote-branch-name>: to merge and reflect the changes 
+     from the remote branch into the current local branch or working directory.
+     
+     [IMPORTANT INTERVIEW] : Difference between FORK and CLONE:
+     - Clone downloads and copies the project files into the local system
+     - Fork copies the project files only on the remote site ( GitHub ) but not on the local, under your GitHub account name.
+     
+     [IMPORTANT INTERVIEW] : Difference between FETCH and PULL:
+     - The pull command will fetch the source code changes from the remote, stores it in
+     the local repository and actually updates the required files in the working copy of the
+     source code in local whereas the FETCH command will only fetch the source code changes 
+     from the remote and stores it in the local repository on the local. It doesn't actually update the 
+     required files in the working copy/directory. To actually reflect the remote changes in the 
+     working copy we have to use Git MERGE after fetch. Following is the SYNTAX of MERGE command:
+     
+     git merge <remote-name>/<remote-branch-name>
+     
+     ################ MERGE CONFLICTS ####################
+     - What are the merge conflicts?
+     Ans: They are the code changes which happen on the same lines of code and the version
+     management tools like Git can't decide which piece of code to merge. This generally happens
+     when 2  or more developers are working on the same feature, in most of the cases. 
+     Merge couldn't be resolved automatically by the version control tool itself, we have
+     to resolve them manually after discussing with other team-mate(s) whose code is causing
+     the conflict and finding ways to accept the correct code snippet. 
+     
+     
+     - In real time automation projects we don't use git fetch and merge much instead we just use
+       git pull. Git fetch and merge is used by the development teams because there are some
+       cases where they don't want merge the changes by other developers directly into their
+       branch. For e.g. there might be a feature which 2 devs are working on together and one
+       developer has completed his changes while the other is still working. So, the other one might
+       fetch his fellow developer's code and continue to first complete his work on his branch and 
+       then merge his fellow dev's changes.
+     
      
      --> HOW PROVIDE REVIEW COMMENTS IN A PULL REQUEST:
            1. Login to github account.
