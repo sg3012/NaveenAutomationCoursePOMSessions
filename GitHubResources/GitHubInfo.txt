@@ -124,6 +124,14 @@ and pull from.
      working copy we have to use Git MERGE after fetch. Following is the SYNTAX of MERGE command:
      
      git merge <remote-name>/<remote-branch-name>
+   
+     - In real time automation projects we don't use git fetch and merge much instead we just use
+       git pull. Git fetch and merge is used by the development teams because there are some
+       cases where they don't want merge the changes by other developers directly into their
+       branch. For e.g. there might be a feature which 2 devs are working on together and one
+       developer has completed his changes while the other is still working. So, the other one might
+       fetch his fellow developer's code and continue to first complete his work on his branch and 
+       then merge his fellow dev's changes.
      
      ################ MERGE CONFLICTS ####################
      - What are the merge conflicts?
@@ -134,14 +142,15 @@ and pull from.
      to resolve them manually after discussing with other team-mate(s) whose code is causing
      the conflict and finding ways to accept the correct code snippet. 
      
+     - How to identify the incoming/remote site changes in a Merge conflict?
+     Ans: To identify those changes focus on the multiple equal to signs ( like this ==========)
+     and commit ID displayed beside multiple right hand side arrows ( like >>>>>>>>> ).
+     The changes displayed below the commit ID are the incoming changes. 
+     NOTE: There is no need to identify the local changes in a merge conflict as 
+     the developer who is getting the merge conflict must know the changes he himself has
+     done in the file in his local on the feature branch he is working.  
      
-     - In real time automation projects we don't use git fetch and merge much instead we just use
-       git pull. Git fetch and merge is used by the development teams because there are some
-       cases where they don't want merge the changes by other developers directly into their
-       branch. For e.g. there might be a feature which 2 devs are working on together and one
-       developer has completed his changes while the other is still working. So, the other one might
-       fetch his fellow developer's code and continue to first complete his work on his branch and 
-       then merge his fellow dev's changes.
+
      
      
      --> HOW PROVIDE REVIEW COMMENTS IN A PULL REQUEST:
