@@ -194,7 +194,26 @@ and pull from.
        - In Windows CMD DON'T FORGET to enclose the arguments HEAD^ in double quotes.
          Otherwise it will not work.
        Now, after issuing the above command when user checks the status again
-       using git status git will show that files are in staging area and changes yet to be committed   
+       using git status git will show that files are in staging area and changes yet to be committed
+       
+       - How to remove the latest files/commits from the local repository as well as staging area that 
+       you have committed most recently in your local, in one shot?
+       Ans: Use the following command: git reset --mixed "HEAD^"
+       NOTE: 
+       - The option mixed means git will delete the files/commits from the local repo as well as the staging
+         area.  
+       
+       - How to remove the latest files/commits from the local repository, staging area and 
+       the physical location (working copy) that you have committed most recently in 
+       your local, in one shot?
+       Ans: Use the following command: git reset --hard "HEAD^"
+       NOTE: 
+       - The option hard means git will delete the files/commits from the local repo, the staging
+         area and the physical location on the local machine
+        - BUT be very CAREFUL while using hard reset as the files in your local will be deleted and 
+          it will be very hard to recover the correct repository state afterwards. So, only use hard
+          reset when you very sure that you don't need the changes you have done most recently
+          ever.
           
      --> HOW PROVIDE REVIEW COMMENTS IN A PULL REQUEST:
            1. Login to github account.
@@ -250,21 +269,3 @@ and pull from.
       is different than my local master branch ( say v 2.0 ). So, I take the pull of the latest version of the master branch code
       from remote to the local branch, to stay up to the date with the latest master code on remote. ( see the image 
       GitHubPRProcess_ShortAnswer.PNG at the project root folder for MORE INFO). 
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
