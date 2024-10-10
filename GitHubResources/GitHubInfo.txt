@@ -5,6 +5,16 @@ and pull from.
 
 - The local site is also called Workspace or working directory. Meaning the folder
   in which the whole project exists.
+  
+  - There are 4 places your code files could reside in Git project
+     1. WORKING COPY/DIRECTORY : It is the actual folder in which your code files exist on your
+         local machine
+     2. STAGING AREA: This is the place where you keep your files when you want to tell
+     	 git that these are files you have added newly or updated and are ready to be commited.
+     3. LOCAL REPO: This is the place where your code files are kept when you commit your code
+         version locally on a branch.
+     4. REMOTE REPO: This is the cloud place or where your code files are kept (like GitHub.com, 
+         GitLab.com etc) when you push your code from your local site. 
 
 - [RECOMMENDED] The number of repositories on the remote site should be equal to the 
   number of projects on the local site i.e., if we have 2 projects for different products with 
@@ -172,7 +182,19 @@ and pull from.
      - How can we avoid conflicts?
      Ans: We have to prevent 2 or more devs to be working on the same feature, functionality
      and the method(s) as the same time, as much as possible. Sometimes, it is not possible practically
-     but try to follow this practice frequently in the real-time projects. 	 
+     but try to follow this practice frequently in the real-time projects. 
+     
+     - How to remove the latest files/commits from the local repository that you have
+       committed most recently in your local?
+       Ans: Use the following command: git reset --soft "HEAD^"
+       NOTE: 
+       - Caret after HEAD means the last commit in the local
+       - The option soft means git will delete the files/commits from the local repo only not
+          the staging area
+       - In Windows CMD DON'T FORGET to enclose the arguments HEAD^ in double quotes.
+         Otherwise it will not work.
+       Now, after issuing the above command when user checks the status again
+       using git status git will show that files are in staging area and changes yet to be committed   
           
      --> HOW PROVIDE REVIEW COMMENTS IN A PULL REQUEST:
            1. Login to github account.
