@@ -145,14 +145,23 @@ and pull from.
      - How to identify the incoming/remote site changes in a Merge conflict?
      Ans: To identify those changes focus on the multiple equal to signs ( like this ==========)
      and commit ID displayed beside multiple right hand side arrows ( like >>>>>>>>> ).
-     The changes displayed below the commit ID are the incoming changes. 
+     The changes displayed below the multiple equal to signs and above the commit ID  
+     are the incoming/remote site changes. 
      NOTE: There is no need to identify the local changes in a merge conflict as 
      the developer who is getting the merge conflict must know the changes he himself has
-     done in the file in his local on the feature branch he is working.  
+     done in the file in his local on the feature branch he is working. But if you still want to identify the
+     local changes those are the ones which are above the equal to signs and below the 
+     written text HEAD with incoming arrows ( like <<<<<<<<).
      
-
-     
-     
+     - How to resolve the merge conflicts?
+     Ans: It is strongly recommended that the developers' whose code files are 
+     getting merge conflicts after trying a git pull, should sit with each other and decide whose
+     code is better and should be accepted for the further development. Once the final code
+     is accepted by mutual agreement then only the unwanted code should be removed and 
+     conflict be resolved. NEVER remove the code by deciding yourself that which code is better
+     and which is not that good. Conflicts must have mutual agreements between the developers
+     whose code files have conflicted code, before deciding which code to keep.
+          
      --> HOW PROVIDE REVIEW COMMENTS IN A PULL REQUEST:
            1. Login to github account.
            2. Go to Repositories tab.
