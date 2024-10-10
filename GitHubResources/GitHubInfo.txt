@@ -161,6 +161,18 @@ and pull from.
      conflict be resolved. NEVER remove the code by deciding yourself that which code is better
      and which is not that good. Conflicts must have mutual agreements between the developers
      whose code files have conflicted code, before deciding which code to keep.
+     
+     - In which cases we will get the Merge Conflicts?
+     Ans: 1. When pulling some code from a remote branch to a local branch
+     		 2. When fetching and merging some code from a remote branch into a local branch
+     		 3. When doing some code merge of local master branch to another local feature branch
+     		 4. When merging some code from a remote branch (say, f1) to a different local branch (say, f2) 
+     		 5. When doing some code merge of local feature branch to the local master branch
+    
+     - How can we avoid conflicts?
+     Ans: We have to prevent 2 or more devs to be working on the same feature, functionality
+     and the method(s) as the same time, as much as possible. Sometimes, it is not possible practically
+     but try to follow this practice frequently in the real-time projects. 	 
           
      --> HOW PROVIDE REVIEW COMMENTS IN A PULL REQUEST:
            1. Login to github account.
