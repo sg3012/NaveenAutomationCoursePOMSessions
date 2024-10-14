@@ -1,0 +1,184 @@
+- [IMPORTANT INTERVIEW] : What is the command to runs Jenkins?
+Ans: Java -jar <jenkins-war-filename-with-extension>
+
+- [IMPORTANT INTERVIEW]: What is the default port number that Jenkins will run on?
+Ans: 8080
+
+- [IMPORTANT INTERVIEW]: How to change the port number of Jenkins server?
+Ans: Java -jar <jenkins-war-filename-with-extension> --httpPort=9090
+NOTE: Using above command the Jenkins will run on port 9090 now
+
+- [IMPORTANT INTERVIEW]: What is the URL that Jenkins server will be running in your local?
+Ans: The url is : https://localhost with port number 8080
+
+- Jenkins has stopped supporting JAVA 8 or lesser. So, if you are using it you will not be able to install and 
+run Jenkins on your system.
+
+- Also, Jenkins supports the Java Versions 11 or 17 or 21 as of now. So, you couldn't use JAVA versions below 11 or 17
+anyhow but if you want to use JAVA versions later than 21 then you should use the options "--enable-future-java" (without space)
+in the Jenkins run command like below:
+	SYNTAX ---> Java -jar <jenkins-war-filename-with-extension> --enable-future-java. 
+NOTE: Make sure the above options to enable JAVA later then 21 at the very last of the Jenkins
+run command. Otherwise it will not work and throws an error. 
+
+- Jenkins can also be setup on remote servers or AWS etc. In that case the Jenkins is usually setup by
+the DevOps teams on the remote machines and they will provide an IP address or URL with port number
+to access Jenkins server in real time projects, with a user name and password.
+
+- NGROKProxy is a server that is used in the test automation infrastructure setup that is used to connect the Jenkins
+to the source code in our GitHub repo with the help of WebHooks. A Webhook is a feature of GitHub which is used to 
+capture the events happening in Github like code push and supply it to the NGROKProxy server. Then NGROKProxy server
+will supply the same code push event to Jenkins and tell it to the run the pipeline as soon as any code push happens
+on GitHub, automatically. With NGROKProxy server setup user doesn't need to go to the Jenkins and run the pipeline
+manually after each code push because NGROKProxy will run it automatically.
+
+- Jenkins needs various plug-ins to serve the purpose for which it is configured like Maven plug-in, Git plug-in, Extent or Allure reports
+plug-in etc.
+
+- The browser is always launched on the machine where Jenkins is installed not in Jenkins itself. Jenkins is not a machine which is a big
+misconception it is just server which you are running on a machine.
+
+- [IMPORTANT INTERVIEW]:  Why do we need the cloud infrastructure like AWS, Docker etc. in our test automation framework?
+OR, What is the business need of cloud infrastructure?
+Ans: When Jenkins is setup on a system and browsers are launching on the same machine. So, every time some other team
+triggers a Jenkins pipeline browsers will pop-up on the same machine and if the same machine is used by some other teams
+then it will create unnecessary hurdles in their work. That is why it is recommended to not use the same machine to open the
+browsers where Jenkins is setup and running and we require separate machines to open the browsers. This is why we need to set 
+up machines with different configurations on some different physical machines, VM or on cloud like AWS etc.
+
+- REMOTEWEBDRIVER is the class which is responsible for the actual execution of test automation suite on the remote environment
+( machines separate from the one you have the automation code base on ). Execution means opening and closing of browsers
+and performing user actions.
+
+- Make Sure you configure following prerequisites before doing any operation in Jenkins:
+   ---> JAVA JDK Installations in tools
+   ---> Maven (to build and run the project) Installations in tools
+   ---> Install the following PLUG-INS: Maven Integration plug-in to manage dependencies 
+          and build the project, TestNG Results plug-in to execute the tests and assert/verify them, 
+          HTML Publisher plug-in to create and attach the test reports in Jenkins, Allure plug-in to create
+          and attach Allure reports in Jenkins, Blue Ocean plug-in to create Blue Ocean pipelines etc.
+       - STEPS TO ADD JAVA JDK INSTALLATIONS:
+       1. Login to the Jenkins instance with correct credentials.
+       2. Click Manage Jenkins from the left navigation panel.
+       3. Click tools tile on the page.
+       4. On configure tools page scroll to JDK installations section.
+       5. Under Add JDK section provide JDK name.
+       6. Provide JAVA_HOME path after referring to your local machine.
+       7. Click Apply and Save at the bottom of the page.
+       
+       - STEPS TO ADD MAVEN INSTALLATIONS:
+       1. Login to the Jenkins instance with correct credentials.
+       2. Click Manage Jenkins from the left navigation panel.
+       3. Click tools tile on the page.
+       4. On configure tools page scroll to Maven installations section.
+       5. Under Add Maven section provide Maven name.
+       6. Check install automatically check-box.
+       7. Select Maven version from the version drop-down install from Apache section.
+       8. Click Apply and Save at the bottom of the page.
+       
+       - STEPS TO DOWNLOAD AND INSTALL NECESSARY PREREQUISITE PLUG-INS:
+        1. Login to the Jenkins instance with correct credentials.
+       	2. Click Manage Jenkins from the left navigation panel.
+       	3. Click Plugins tile on the page.
+       	4. From plugins manager page go to Available plugins from the left navigation panel.
+       	5. Search for either of the following plugins - Maven Integration , TestNG Results, 
+          	HTML Publisher, Allure, Blue Ocean etc.
+        6. Click the check-box against the required row.
+        7. Click install button at the top-right corner. 
+        8. Observe the download progress of the required plugin at the bottom of the 
+        	Download Progress page.
+        9. Once there is a Green Success tick in the download list for the plugin, it is
+            successfully installed and added to your Jenkins instance.
+       
+- HOW TO CREATE A BASIC JENKINS JOB:
+1. Login to the Jenkins instance with correct credentials.
+2. On the Dashboard page click new item link at the top of the left navigation panel. 
+3. On the new item page enter some meaning Jenkins job name in "Enter an item name"
+    field.
+4. Click ok and your very basic Jenkins Job is created.
+
+- HOW TO CONFIGURE A JENKINS JOB WITH VARIOUS OTHER PARAMETERS:
+1. Create a basic Jenkins job as explained in above steps.
+2. Once you click ok from above steps at last Provide a description to the Jenkins
+    Job under General section on Configuration page.
+3. Scroll to source code management section and appropriate tool ( in our case Git ).
+4. Provide the Repository URL in the Repository URL field after copying it
+    from your GitHub account.
+5. Provide a branch name under branch name field ( usually we provide master
+    branch as it is the most stable branch in the following format - */master.
+6. Provide value in Root POM field (path of the pom.xml file, usually the project root) 
+	under Build section like "pom.xml"
+7. Under Goals and options section provide the maven goals to run.  We usually
+   provide the following command "mvn clean install"
+8. Scroll down to the Post-Build Actions section and select which action
+    you want to perform when the Jenkins job is completed. We usually select
+    following options from the drop-down:
+    ---> Publish TestNG results
+    ---> Publish the HTML report ( Mainly for Extent Reports )
+           - Under Publish the HTML report sub-section provide values in the following fields:
+             1. HTML directory to archive: Path of the folder/directory in which reports will be created
+             2. index page(s) : Report's file name 
+             3. Index page title[s] : Extent report file's index page title. We could give any title
+             4. Report title: Whole Extent report's title. We could give any title, usually we give the same
+                 title as the index page.
+             5. Publishing options : click publishing options and select Keep past HTML reports,
+                 Always link to the last build check-box.
+    ---> Allure report
+           - Under Allure reports sub-section provide the values in the following fields:
+             1. Path : the path to the folder where allure reports will be generated in your project
+                 (By default it's "allure-results" folder under project root).
+             2. Configure the Allure Commandline to let Jenkins know that where it
+                 will be downloaded and installed to remove this message "Jenkins needs 
+                 to know where your Allure Commandline is installed. Please do so from the 
+                 Global Tool Configuration." ( See below steps to configure ALLURE COMMANDLINE).
+ 9. Click Apply and Save buttons and your job is saved. 
+ 10. Go to dashboard again by clicking the Jenkins logo at top-left you will see your job listed on that page (usually at the top).
+     
+- STEPS TO CONFIGURE ALLURE COMMAND LINE FOR JENKINS:
+PREREQUISITES: Make sure you must have installed the Allure Jenkins plugin from the pulgins page. 
+   1. Login to the Jenkins instance with correct credentials.
+   2. Click Manage Jenkins from the left navigation panel.
+   3. Click tools tile on the page.
+   4. Scroll down to the Allure Commandline installations section.
+   5. Provide any name in the name field Allure Commandline section.
+   6. Check install automatically checkbox.
+   7. Select a version from the version drop-down under From Maven Central sub-section.
+   8. Click Apply and save buttons
+            
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                          
+             
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

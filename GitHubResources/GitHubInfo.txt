@@ -215,6 +215,15 @@ and pull from.
           reset when you very sure that you don't need the changes you have done most recently
           ever.
           
+       - How to remove the latest commits/files when you have commited the changes and pushed them into
+         the remote repo?
+         Ans: There are 2 ways:
+         1. Go to the remote repo >> navigate to the file location >> locate the 3 dots icon and click it
+         >> from the context click delete and confirm on the dialog that appears and the file will be deleted.
+         2. But if you don't the rights to delete the file in remote then follow the following steps:
+             ---> Do a hard reset in local and point to the commit where that file was not there which you want to delete
+             ---> Then use git push command with force option "f" like git push <remote-name> -f <remote-branch-name> 
+          
      --> HOW PROVIDE REVIEW COMMENTS IN A PULL REQUEST:
            1. Login to github account.
            2. Go to Repositories tab.
