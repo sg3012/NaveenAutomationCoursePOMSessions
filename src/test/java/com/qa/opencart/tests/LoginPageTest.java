@@ -99,6 +99,13 @@ public class LoginPageTest extends BaseTest {
 		Assert.assertEquals(accountsPage.isLogoutLinkExist(), true);
 	}
 	
+	@Description("checking sanity test")
+	@Severity(SeverityLevel.MINOR)
+	@Test (priority = 7)
+	public void sanityTest() {
+		Assert.assertEquals(true,true);
+	}
+	
 	@Description("checking naveen test")
 	@Severity(SeverityLevel.MINOR)
 	@Test (priority = 6, enabled = false)
