@@ -144,6 +144,28 @@ PREREQUISITES: Make sure you must have installed the Allure Jenkins plugin from 
    6. Check install automatically checkbox.
    7. Select a version from the version drop-down under From Maven Central sub-section.
    8. Click Apply and save buttons
+   
+  - STEPS TO RUN A BUILD FROM JENKINS:
+ 1. Login to the Jenkins instance with correct credentials.
+ 2. From the Dashboard page click on the Jenkins job you wish to run.
+ 3. From the Job page click Build now link in the left navigation pane and your build will start.
+ 
+ -- NOTE [IMPORTANT]: While giving the maven command while configuring the build in Jeknins
+ don't use the prefix "mvn" otherwise the build will fail. Just use the main clauses in the command
+ and Jenkins will understand automatically that it is a maven command. Give it like this "clean install"
+ not like "mvn clean install"
+ 
+ -- [NOTE IMPORTANT]: Jenkins is not able to parse and generate the ExtentReports directly due to some
+ limitations in their CSV logics and capability to generate HTML reports directly. But there are 2 solutions
+ to generate and see the extentreports correctly:
+ 1. Download some CSP plugins in Jenkins environment. For this to implement in real time projects
+ you have to raise a bug toy your devOps team to download the plugins for you in Jenkins. But
+ they will reject this request in most cases as implementing custom CSP scripts has some potential
+ security issues and if there are some other developers who are working on the same Jenkins
+it ( security issue ) might impact their work. So, we cannot try this solution.
+
+2. Install and enable the chrome extension "Disable Content-Security-Policy" in your browser. Now, 
+refresh the Jenkins URL having extent reports path and it will work. [RECOMMENDED SOLUTION]
             
                  
                  
