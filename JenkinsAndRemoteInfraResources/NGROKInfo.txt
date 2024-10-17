@@ -1,0 +1,38 @@
+- How to connect your NGROK application on your local to your NGROK web dashboard application
+account? OR How to add authtoken to your NGROK account?
+Ans: Open CMD >> Navigate to the folder where you have unzipped your NGRok app >> 
+Use this commad on WINDOWS: ngrok authtoken <auth-token-copied-from-NGROk-WebApp>
+When we run the above command the authtoken gets saved in ngrok.yml file in your local system.
+
+- How to connect your NGROK app with the Jenkins server?
+Ans: Use the following command on Windows after navigating to the directory
+in which NGROK is installed: ngrok http <port-number-on-which-Jenkins-is-running>. By
+default the port number of Jenkins will be 8080. After you run this command your ngrok
+proxy server will be launched with some details displayed about server.
+
+- How to add webhooks to a GitHub project repo?
+Ans: Steps are as follows:
+1. Login to the Github account
+2. Go to your repository
+3. Click the settings (not the account settings) tab under the same repository name
+4. On settings page go to webhooks page by clicking the same link on the
+    left navigation panel.
+5. Click Add webhook.
+6. Go to the CMD page where NGROK proxy details are displayed after running.
+7. Copy the NGROK URL in the "forwarding" row just before the arrow symbol
+   ( it will be something like https://bf1a-157-119-81-82.ngrok-free.app)
+8. Provide this value in the payload URL field on the 
+    Webhooks page: https://bf1a-157-119-81-82.ngrok-free.app/github-webhook
+    ( The payload URL is combination of 2 things the URL copied from the NGROK
+      details page in step 7 and the path /github-webhook/ appended just
+      after the NGROK details page URL ).
+9. Scroll to the section with heading "Which events would you like to trigger this webhook?"
+    and Select the following radio button "Just the push event"
+10. Keep the remaining selected values on the page as it is and click Add Webhook button.
+11. Webhook should be added. 
+    
+
+
+
+
+

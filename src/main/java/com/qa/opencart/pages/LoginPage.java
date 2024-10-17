@@ -47,7 +47,6 @@ public class LoginPage {
 	private By forgotPwdLink = By.linkText("Forgotten Password");
 	private By registerLink = By.linkText("Register");
 	private By invalidLoginErrMsg = By.cssSelector("div.alert.alert-danger");
-	private By homeLink = By.linkText("home");
 	
 
 	// 2. public Page Constructor - for creating page object using driver reference

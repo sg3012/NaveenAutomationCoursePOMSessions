@@ -39,12 +39,14 @@ plug-in etc.
 misconception it is just server which you are running on a machine.
 
 - [IMPORTANT INTERVIEW]:  Why do we need the cloud infrastructure like AWS, Docker etc. in our test automation framework?
-OR, What is the business need of cloud infrastructure?
+OR, What is the business need of cloud infrastructure or What is the need of a separate environment to
+run the tests and a separate one for Running Jenkins server?
 Ans: When Jenkins is setup on a system and browsers are launching on the same machine. So, every time some other team
 triggers a Jenkins pipeline browsers will pop-up on the same machine and if the same machine is used by some other teams
 then it will create unnecessary hurdles in their work. That is why it is recommended to not use the same machine to open the
 browsers where Jenkins is setup and running and we require separate machines to open the browsers. This is why we need to set 
 up machines with different configurations on some different physical machines, VM or on cloud like AWS etc.
+JENKINS environment is ONLY configured for TRIGGERING purpose NOT THE TEST EXECUTION purpose. 
 
 - REMOTEWEBDRIVER is the class which is responsible for the actual execution of test automation suite on the remote environment
 ( machines separate from the one you have the automation code base on ). Execution means opening and closing of browsers
@@ -166,6 +168,19 @@ it ( security issue ) might impact their work. So, we cannot try this solution.
 
 2. Install and enable the chrome extension "Disable Content-Security-Policy" in your browser. Now, 
 refresh the Jenkins URL having extent reports path and it will work. [RECOMMENDED SOLUTION]
+
+-- [NOTE]: How to check what are the latest code changes in the latest build you have run in Jenkins?
+Ans: Go to the Job from home page >> under builds section click the latest build# >>
+on the build page click the changes link from the left navigation panel and you will
+see the changes in the latest build in the form of commit messages for latest changes.
+
+- How to configure a Jenkins Job to capture the Git webhook events
+and trigger it automatically on the webhook events?
+Ans: Login to Jenkins >> Go to the automation Job from dashboard >> Navigate to configure Job page
+by clicking configure link from the left navigation panel >> Scroll down to Build Triggers section >>
+Check the option "GitHub hook trigger for GITScm polling" check-box. Now, the Jenkins job
+is configured to run automatically whenever the required GitHub event ( like push, pull etc. ) happens
+and the webhook conveys that to NGROK proxy which in turn tells Jenkins. 
             
                  
                  
