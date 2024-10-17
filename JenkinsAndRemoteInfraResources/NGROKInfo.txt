@@ -30,6 +30,9 @@ Ans: Steps are as follows:
     and Select the following radio button "Just the push event"
 10. Keep the remaining selected values on the page as it is and click Add Webhook button.
 11. Webhook should be added. 
+
+--> In real-time projects the NGROK proxy server should be installed and configured on the same machine
+where Jenkins is running. Otherwise there will be a lot of difficulty in connecting Jenkins and NGROK proxy.
     
 
 
