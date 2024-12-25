@@ -88,7 +88,9 @@ public class DriverFactory {
 		
 		// Reading the browser environment value from mvn install command 
 		// either via command line // or eclipse UI
-		// String browserName = System.getProperty("browser");
+		// MVN command to pass the browser name at run time: 
+		// mvn clean install -Dbrowser="<browser-of-your-choice>"
+//		String browserName = System.getProperty("browser");
 		System.out.println("browser name is: " + browserName);
 		optionsManager = new OptionsManager(prop);
 		highlight = prop.getProperty("highlight");
@@ -169,8 +171,9 @@ public class DriverFactory {
 		// ################ CONFIGURING MAVEN BUILD COMMANDS ##############
 		
 		// There are 2 ways we can CONFIGURE THE MAVEN COMMAND 
-		// which will supplied to getProperty() in this method
-		// and run our tests on the desired env (RUN CONFIGURATIONS):
+		// the variable value of which will be supplied to 
+		// getProperty() in this method and run our tests on 
+		// the desired env (RUN CONFIGURATIONS):
 		// 1. Configure this command in Eclipse >> Run the tests using Eclipse UI
 		// by supplying this command
 		// 2. Supply this command using command line interface (CMD in Windows) >> 

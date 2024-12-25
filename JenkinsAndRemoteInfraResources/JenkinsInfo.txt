@@ -1,8 +1,13 @@
 - [IMPORTANT INTERVIEW] : What is the command to runs Jenkins?
-Ans: Java -jar <jenkins-war-filename-with-extension>
+Ans: Navigate to the folder where Jenkins' war file
+is placed using any command line tool and use the below command:
+Java -jar <jenkins-war-filename-with-extension> --> This command will work
+Java version before 22
+--> If you have Java version 22 or later use the above command using following option:
+Java -jar <jenkins-war-filename-with-extension> --enable-future-java
 
 - [IMPORTANT INTERVIEW]: What is the default port number that Jenkins will run on?
-Ans: 8080
+Ans: 8080. The URL you should use is localhost:8080
 
 - [IMPORTANT INTERVIEW]: How to change the port number of Jenkins server?
 Ans: Java -jar <jenkins-war-filename-with-extension> --httpPort=9090
@@ -174,13 +179,69 @@ Ans: Go to the Job from home page >> under builds section click the latest build
 on the build page click the changes link from the left navigation panel and you will
 see the changes in the latest build in the form of commit messages for latest changes.
 
-- How to configure a Jenkins Job to capture the Git webhook events
-and trigger it automatically on the webhook events?
+- How to configure a Jenkins Job to capture the Git webhook events like code push, pull etc.
+and trigger it automatically on the events?
 Ans: Login to Jenkins >> Go to the automation Job from dashboard >> Navigate to configure Job page
 by clicking configure link from the left navigation panel >> Scroll down to Build Triggers section >>
 Check the option "GitHub hook trigger for GITScm polling" check-box. Now, the Jenkins job
 is configured to run automatically whenever the required GitHub event ( like push, pull etc. ) happens
 and the webhook conveys that to NGROK proxy which in turn tells Jenkins. 
+
+- How to configure a Jenkins Job to trigger automatically (CRON Job) after a specific time 
+interval (RECURRING Jenkins JOBS)? 
+Ans: Login to Jenkins >> Go to the automation Job from dashboard >> Navigate to configure Job page
+by clicking configure link from the left navigation panel >> Scroll down to Build Triggers section >>
+Check the option "Build periodically" >> Now, you could provide the time interval using the following syntax
+in Jenkins:
+
+Syntax : ***** (Five stars)
+These 5 stars have following meaning:
+First star corresponds to MINUTES whose values range is 0-59
+Second star corresponds to HOURS whose values range is 0-23
+Third star corresponds to DAY IN A MONTH whose values range is 1-31
+Fourth star corresponds to MONTH IN A YEAR whose values range is 1-12
+Fifth star corresponds to DAYOFTHEWEEK whose values range is 0-7. Where
+0 and 7 are Sundays.
+So, if we have to schedule our Job to run every 5 minutes then we could give the time interval
+like below:
+*/5 * * * * for the versions 2014 or earlier.
+H/5 * * * * for the versions 2015 or later.
+NOTE: 
+1. All stars MUST be separated by space.
+2. You could use the following link to see the syntax recurring
+    Jenkins jobs: https://stackoverflow.com/questions/12472645/how-do-i-schedule-jobs-in-jenkins
+
+- How do you parameterize your Jenkins jobs and configure them to run on different environments?
+Ans: We use the "Extended Choice Parameter" plugin to fulfill this purpose. Below are the steps to
+install the plugin and configure your Jenkins job to run on different parameters like run environment:
+1. Login to Jenkins with valid creds.
+2. From the landing page / Dashboard page click on the Manage Jenkins
+    link in the left navigation.
+3. From the manage Jenkins page click Plugins tile.
+4. In the search box type "choice" and locate Extended Choice Parameter plugin
+    listed in the search results below.
+5. Once found Click the check-box beside it's name.
+6. Click on Install without restart
+7. Go to the dashboard again and go to the Job page.
+8. Under General section check the option "This project is parameterized"
+9. Under the drop-down which is displayed select "choice parameter"
+10. On the choice parameter form which is opened up now give the values in the following fields:
+     Name: Any name of your choice like "envName" for environment.
+     Choices: Any env name like "dev","qa","stage","uat","prod". All of these values should
+     be in separate lines.
+     Description: Any description about the parameter.
+ 11. Scroll down to the Goals and options section and provide the following command
+       "clean install -D<Any-envVar-Name-which-you-want-to-use-with-this-maven-command>=
+       ${<envVar-name-given-in-Step10>}".
+12. Click Apply and Save. Now, the Job is successfully parameterized.
+   
+- How to run the Jenkins job which is parameterized, with different parameters?
+Ans: Pre-requisite: Configure Jenkins job to run with different parameters as shown in above steps.
+STEPS: On the Job page click the link "Build with parameters" from left navigation panel >> 
+On the next page select any value from the drop-down ( for e.g. "stage") >> Click on Build and the
+job will start
+ 
+
             
                  
                  

@@ -33,6 +33,21 @@ Ans: Steps are as follows:
 
 --> In real-time projects the NGROK proxy server should be installed and configured on the same machine
 where Jenkins is running. Otherwise there will be a lot of difficulty in connecting Jenkins and NGROK proxy.
+
+--> What is the advantage of using NGROK proxy server in real-time projects?
+Ans: In some projects the devOps or the senior dev team members don't give access to Jenkins at all because
+every thing is setup and automated. So, if NGROK proxy is there we can just push the code to our GitHUb repo
+and the webhook will capture and supply the push event to NGROKProxy which in turn will supply the same
+event to the Jenkins that will trigger the Job(s) automatically. So, in this case we don't access to Jenkins and 
+run the job manually. Instead NGROK proxy will supply the event to Jenkins and run the jobs automatically.
+
+[REMEMBER]: The webhooks are always created on a specific branch not the whole repository. So, if you are on
+a feature branch and go to the settings tab under repository section and configure webhooks there they will
+always capture the event from the feature branch only not from every branch.
+
+[IMPORTANT]: If you disconnect or terminate your ngrok proxy server using ctrl + c and it's giving you
+a different proxy URL on the ngrok proxy details page in CMD when you again start the server, then you have 
+to update your webhook in github every time you terminate the server.
     
 
 
