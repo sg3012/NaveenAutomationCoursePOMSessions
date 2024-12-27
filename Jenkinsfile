@@ -46,9 +46,9 @@ pipeline{
             }
         }
         
-         stage("Run sanity test cases on QA"){
+         stage("Run sanity test cases on Stage"){
             steps{
-                echo("Run sanity test cases on QA")
+                echo("Run sanity test cases on Stage")
             }
         }
         
