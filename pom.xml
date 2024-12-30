@@ -129,8 +129,11 @@
 					<forkCount>3</forkCount>
 					<reuseForks>true</reuseForks>
 					<suiteXmlFiles>
-						<suiteXmlFile>
-							src/test/resources/testrunners/testng_regression.xml</suiteXmlFile>
+						<!--<suiteXmlFile> src/test/resources/testrunners/testng_regression.xml</suiteXmlFile>-->
+						<suiteXmlFile>${suiteXmlFile}</suiteXmlFile> <!--We are giving variable in the filename
+						in the suiteXmlfile tag here because we will pass this as a variable from the Jenkinsfile 
+						to pick corresponding testng runner files. This parameter need not be exactly same as the Jenkinsfile
+						parameter--> 
 					</suiteXmlFiles>
 					<argLine>
 						-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
