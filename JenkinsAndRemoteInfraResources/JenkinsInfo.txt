@@ -240,6 +240,12 @@ Ans: Pre-requisite: Configure Jenkins job to run with different parameters as sh
 STEPS: On the Job page click the link "Build with parameters" from left navigation panel >> 
 On the next page select any value from the drop-down ( for e.g. "stage") >> Click on Build and the
 job will start
+
+- What is the command to run shell commands in windows and mac?
+Ans: In Mac we use 'sh' and In windows we use 'bat'
+
+- Where should we maintain our Jenkinsfile?
+Ans: We should always maintain our Jenkinsfile in the Dev repo.
  
 
             
