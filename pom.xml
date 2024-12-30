@@ -22,8 +22,8 @@
 				respective sections. -->
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!--<maven.compiler.source>1.22</maven.compiler.source>
-		<maven.compiler.target>1.22</maven.compiler.target>-->
+		<maven.compiler.source>1.22</maven.compiler.source>
+		<maven.compiler.target>1.22</maven.compiler.target>
 		<extentreports-version>5.1.2</extentreports-version>
 		<aspectj.version>1.9.22.1</aspectj.version>
 	</properties>
