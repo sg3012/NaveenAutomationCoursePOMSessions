@@ -84,7 +84,6 @@ pipeline
             }
         }
         
-   
         stage('Publish sanity Extent Report'){
             steps{
                      publishHTML([allowMissing: false,
