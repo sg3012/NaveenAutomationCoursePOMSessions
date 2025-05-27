@@ -1,0 +1,18 @@
+1. What are the name of the software we could use to install and configure different types of virtual machines
+on a physical machine?
+Ans: Hypervisor provided by company VMWare, Citrix Workspace provided by company Citrix systems etc.
+
+2. What are pros and cons of setting up Selenium Grid using virtual machines?
+Ans : PROS
+1.  Maintenance overhead of Grid nodes and Hub is less.
+2. We need only one physical machine/HW to configure different VMs 
+for nodes and hub
+
+CONS:
+1. This architecture is still expensive.
+2. We need to hire a dedicated person having expertise in VMs
+    to handle issues like memory issues with nodes and hub, restart the Vms, Install and configure
+    new VMs if there is a new version available, Configure hub and nodes etc.
+3. This VM design is very heavy weight because we need to install full OS along with
+    VM if we just need a different browser version for our tests. And these VMs consume too
+    much of RAM.

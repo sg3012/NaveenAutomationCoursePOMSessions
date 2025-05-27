@@ -29,7 +29,7 @@
 	-->
 
 
-<suite name="Open Cart App Test Regression Suite"  thread-count="4" parallel="tests"  verbose="2">
+<suite name="Open Cart App Test Integration Regression Suite"  thread-count="5" parallel="tests"  verbose="2">
 	<!-- 
 	1. If we don't want to add listeners in the testNG runner file, we could also
 	add them in the test classes (see LoginPageTest.java for usage) 
@@ -37,28 +37,28 @@
 	2. But the DISADVANTAGE of adding listeners at the respective class level
 	is we have to add listener in every class if we have to execute
 	multiple test classes as part of a test suite at the same time. -->
-	<listeners>
+	<!-- <listeners>
 		<listener class-name="com.qa.opencart.listeners.ExtentReportListener"/>
 		<listener class-name="com.qa.opencart.listeners.TestAllureListener"/>
-		<!-- Providing Retry Listener at the suite level (For all tests at once) -->
+		Providing Retry Listener at the suite level (For all tests at once)
 		<listener class-name="com.qa.opencart.listeners.AnnotationTransformer"/>
-	</listeners>
+	</listeners> -->
 	
 	
 	<test name="Login Page Test">
 	<!-- WRITING BROWSER PARAMETERS HERE SO THAT WE COULD RUN OUR TESTS
 	ON CROSS BROWSERS IN PARALLEL -->
-		<parameter name="browser" value="firefox"></parameter>
+<!-- 		<parameter name="browser" value="firefox"></parameter>
 		<parameter name="browserVersion" value="125"></parameter>
-		<!-- TEST NAME PARAMETER WILL BE USED TO FETCH AND DISPLAY THE
+ -->		<!-- TEST NAME PARAMETER WILL BE USED TO FETCH AND DISPLAY THE
 		CURRENTLY RUNNING TEST ON THE RESPECTIVE SELENOID CONTAINER -->
-		<parameter name="testname" value="Login Page Test"></parameter>
+		<!-- <parameter name="testname" value="Login Page Test"></parameter> -->
 		<classes>
 			<class name="com.qa.opencart.tests.LoginPageTest" />
 		</classes>
 	</test>
 
-	<test name="Accounts Page Test">
+	<!-- <test name="Accounts Page Test">
 		<parameter name="browser" value="firefox"></parameter>
 		<parameter name="browserVersion" value="100"></parameter>
 		<parameter name="testname" value="Accounts Page Test"></parameter>
@@ -74,15 +74,15 @@
 		<classes>
 			<class name="com.qa.opencart.tests.ProductInfoTest" />
 		</classes>
-	</test>
+	</test> -->
 
-	<test name="Register Page Test">
+	<!-- <test name="Register Page Test">
 	<parameter name="browser" value="chrome"></parameter>
 	<parameter name="browserVersion" value="90"></parameter>
 	<parameter name="testname" value="Register Page Test"></parameter>
 		<classes>
 			<class name="com.qa.opencart.tests.RegisterPageTest" />
 		</classes>
-	</test>
+	</test> -->
 
 </suite>

@@ -1,5 +1,7 @@
 package com.qa.opencart.factory;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -37,6 +39,39 @@ public class OptionsManager {
 		if(Boolean.parseBoolean(prop.getProperty("incognito"))) { 
 			co.addArguments("--incognito");
 		}
+		
+		if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+			co.setCapability("browserName", "chrome");
+			//co.setCapability("enableVNC", true); // enableVNC means
+			// enabling the visual properties of the browser on remote
+			// infrastructure to true. So that we could see actual
+			// opening of the browser and see the running tests
+			// on remote machines. If we don't set it we will not
+			// see any browser opening on the remote machine
+			co.setBrowserVersion(prop.getProperty("browserversion").trim()); // Setting
+			// the browserversion using the same variable
+			// from the properties file which is set at run time
+			// in the base test. We are setting browser version capability
+			// also so that we could run our tests on cross browser
+			// versions in parallel.
+			
+			// Below lines of code are used to configure
+			// Selenoid with different capabilities like
+			// screen resolution for running tests, 
+			// enable VNC to true so that we could
+			// see our running tests in real-time etc
+			Map<String,Object> selenoidOptions = new HashMap<>();
+			selenoidOptions.put("screenResolution", "1280x1024x24");
+			selenoidOptions.put("enableVNC", true);
+			// This test name capability will be read
+			// here from the properties file to be
+			// supplied as the test name visible
+			// on the selenoid container running the
+			// test
+			selenoidOptions.put("name", prop.getProperty("testname"));
+			co.setCapability("selenoid:options", selenoidOptions);
+		}
+		
 		return co;
 	}
 	
@@ -54,6 +89,11 @@ public class OptionsManager {
 		if(Boolean.parseBoolean(prop.getProperty("incognito"))) { 
 			fo.addArguments("--incognito");
 		}
+		if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+			fo.setCapability("browserName", "firefox");
+			//fo.setCapability("enableVNC", true);
+			fo.setBrowserVersion(prop.getProperty("browserversion").trim());
+		}
 		return fo;
 	}
 	
@@ -70,6 +110,10 @@ public class OptionsManager {
 		}
 		if(Boolean.parseBoolean(prop.getProperty("incognito"))) { 
 			eo.addArguments("--incognito");
+		}
+		if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+			eo.setCapability("browserName", "edge");
+			//eo.setCapability("enableVNC", true);
 		}
 		return eo;
 	}

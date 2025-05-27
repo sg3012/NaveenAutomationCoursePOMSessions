@@ -5,6 +5,7 @@ import java.util.Properties;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
 
 import com.qa.opencart.factory.DriverFactory;
@@ -49,10 +50,38 @@ public class BaseTest {
 	// Also, we have made the SoftAssert ref. as protected
 	// so that we can access it inside the child classes
 	// of BaseTest in a different than baseTest.
+	@Parameters({"browser","browserVersion","testname"})
+	// 1. Passing parameters annotation here
+	// we could read the browser,browserVersion parameters from the testNG file
+	// when we want to run our tests on cross-bowser, in parallel
+	// and on different browser versions
+	// String browserName, String browserVersion,
+	// String testName
 	@BeforeTest
-	public void setUp() {
+	public void setUp(String browserName, String browserVersion, String testName) {
 		df = new DriverFactory();
 		prop = df.initProp();
+		
+		if(browserName!=null) { 
+			// updating the desired browser properties file
+			// (say, qa.config.propperties)on the run using 
+			// setProperty method of properties class to the value
+			// we are receiving from the parameters annotation i.e., 
+			// "browser" and "browserVersion".
+			// So that we could run our tests on cross browsers, in parallel
+			// and on different browser versions.
+			prop.setProperty("browser", browserName);
+			prop.setProperty("browserversion", browserVersion);
+			// This testname parameter will be read
+			// from the parameters of testng_regression.xml runner file
+			// and set in the respective properties file
+			// to the the testname which is coming from 
+			// runner file. So, that the currently running 
+			// testname could be displayed on the Selenoid container
+			prop.setProperty("testname", testName);
+			
+		}
+		
 		driver = df.initDriver(prop); 
 		loginPage = new LoginPage(driver); // We have initialized the login
 		// page constructor in the Base class because when
@@ -73,5 +102,5 @@ public class BaseTest {
 	public void tearDown() {
 		driver.quit();
 	}
-
+	
 }

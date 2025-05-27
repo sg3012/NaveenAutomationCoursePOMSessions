@@ -4,6 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Properties;
 
 import org.openqa.selenium.OutputType;
@@ -13,6 +17,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 /**
@@ -61,6 +66,8 @@ public class DriverFactory {
 	WebDriver driver;
 	Properties prop;
 	OptionsManager optionsManager;
+	URI uri;
+	URL url;
 	public static String highlight; // We have
 	// used the highlight property in the Diverfactory
 	// class because this class serves a driver
@@ -97,28 +104,44 @@ public class DriverFactory {
 
 		switch (browserName.toLowerCase().trim()) {
 		case "chrome":
-			// driver = new ChromeDriver(optionsManager.getChromeOptions()); // Don't
-			// initialize the webdriver instance like this now. Initialize
-			// it using Threadlocal class using the syntax as mentioned below:
-			tldriver.set(new ChromeDriver(optionsManager.getChromeOptions()));
-			// Here, the set method takes the WebDriver interface
-			// reference but we are passing the ChromeDriver's Object
-			// which is fine because ChromeDriver is also a type
-			// WebDdriver in Selenium hierarchy. We could also pass
-			// ChromeDriver class reference here because of the same reason.
-			// Now, we can initialize the driver for firefox, edge, safari using the
-			// same threadlocal syntax like above.
+			if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+				// CODE BLOCK FOR RUNNING TESTS ON REMOTE
+				// SELENIUM GRID
+				// run tests on remote
+				init_remoteDriver("chrome");
+			}
+			else {
+				// run tests on local
+				// driver = new ChromeDriver(optionsManager.getChromeOptions()); // Don't
+				// initialize the webdriver instance like this now. Initialize
+				// it using Threadlocal class using the syntax as mentioned below:
+				tldriver.set(new ChromeDriver(optionsManager.getChromeOptions()));
+				// Here, the set method takes the WebDriver interface
+				// reference but we are passing the ChromeDriver's Object
+				// which is fine because ChromeDriver is also a type
+				// WebDdriver in Selenium hierarchy. We could also pass
+				// ChromeDriver class reference here because of the same reason.
+				// Now, we can initialize the driver for firefox, edge, safari using the
+				// same threadlocal syntax like above.
+			}
 			break;
 		case "firefox":
-			// driver = new FirefoxDriver(optionsManager.getFirefoxOptions());
-			tldriver.set(new FirefoxDriver(optionsManager.getFirefoxOptions()));
+			if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+				init_remoteDriver("firefox");
+			}
+			else {
+				tldriver.set(new FirefoxDriver(optionsManager.getFirefoxOptions()));
+			}
 			break;
 		case "edge":
-			// driver = new EdgeDriver(optionsManager.getEdgeOptions());
-			tldriver.set(new EdgeDriver(optionsManager.getEdgeOptions()));
+			if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+				init_remoteDriver("edge");
+			}
+			else {
+				tldriver.set(new EdgeDriver(optionsManager.getEdgeOptions()));
+			}
 			break;
 		case "safari":
-			// driver = new SafariDriver();
 			tldriver.set(new SafariDriver());
 			break;
 		default:
@@ -129,7 +152,49 @@ public class DriverFactory {
 		getDriver().manage().deleteAllCookies();
 		getDriver().get(prop.getProperty("url"));
 		return getDriver();
+	}
 
+	/**
+	 * Generic method to initialize the web driver on
+	 * remote machines like Selenium GRID nodes
+	 * @param browserName
+	 */
+	private void init_remoteDriver(String browserName) {
+		
+		System.out.println("Running tests on GRID with browser: "+browserName);
+		
+		try {
+			switch (browserName.toLowerCase()) {
+			case "chrome":
+				uri = new URI(prop.getProperty("huburl"));
+				url = uri.toURL();
+				tldriver.set(new RemoteWebDriver(
+						url, optionsManager.getChromeOptions()));
+				break;
+			case "firefox":
+				uri = new URI(prop.getProperty("huburl"));
+				url = uri.toURL();
+				tldriver.set(new RemoteWebDriver(
+						url, optionsManager.getFirefoxOptions()));
+				break;
+			case "edge":
+				uri = new URI(prop.getProperty("huburl"));
+				url = uri.toURL();
+				tldriver.set(new RemoteWebDriver(
+						url, optionsManager.getEdgeOptions()));
+				break;
+			default:
+				System.out.println("Wrong browser info....cannot run on "
+						+ "Grid remote machine");
+				break;
+			}
+		}
+		catch(MalformedURLException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+	
 	}
 
 	public static WebDriver getDriver() {
@@ -190,7 +255,7 @@ public class DriverFactory {
 		// you can click on Run button to run it.
 		
 		// NOTE: If you don't give the environment value with the command
-		// using -D option like "-Denv = 'qa'" and you only give the commad
+		// using -D option like "-Denv = 'qa'" and you only give the command
 		// clean install then the env value will be passed as null in the code
 		// script consuming this command. If you have any logic associated
 		// with the null env value being passed in your code then your scripts
@@ -312,7 +377,7 @@ public class DriverFactory {
 		try {
 			// if no env is given
 			if (envName == null) {
-				System.out.println("no env is given...hence running it on QA env...by default");
+				System.out.println("no env is given...hence running it on QA env by default");
 				ip = new FileInputStream("./src/test/resources/config/qa.config.properties");
 			}
 

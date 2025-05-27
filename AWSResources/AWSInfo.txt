@@ -1,0 +1,7 @@
+--> Which AWS service is used to create machine(s) with different configurations?
+Ans: Compute Service
+
+--> We need to create some security groups to access different applications and even the AWS machines
+itself under different security protocols. These security groups are often called as virtual firewalls.
+Through security groups we could access selenoid grid on 4444, selenoid UI on 8080, ssh connections
+for login and accessing those machine etc. 

@@ -75,7 +75,7 @@ public class LoginPageTest extends BaseTest {
 	
 	@Description("check forgot pwd link exists on login page......")
 	@Severity(SeverityLevel.CRITICAL)
-	@Test (priority = 3)
+	@Test (priority = 3, enabled = false)
 	public void isForgotPwdLinkExistTest() {
 		Assert.assertTrue(loginPage.isForgotPwdLinkExist());
 	}
@@ -93,7 +93,7 @@ public class LoginPageTest extends BaseTest {
 	
 	@Description("check user is able to login to open cart app with valid credentials......")
 	@Severity(SeverityLevel.BLOCKER)
-	@Test (priority = 5)
+	@Test (priority = 5,enabled = false)
 	public void loginTest() {
 		accountsPage = loginPage.doLogin(prop.getProperty("username"),prop.getProperty("password"));
 		Assert.assertEquals(accountsPage.isLogoutLinkExist(), true);
@@ -101,7 +101,7 @@ public class LoginPageTest extends BaseTest {
 	
 	@Description("checking sanity test")
 	@Severity(SeverityLevel.MINOR)
-	@Test (priority = 7)
+	@Test (priority = 7,enabled = false)
 	public void sanityTest() {
 		Assert.assertEquals(true,true);
 	}

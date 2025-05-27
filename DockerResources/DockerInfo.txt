@@ -1,0 +1,149 @@
+[IMPORTANT]: Starting version 4.37.1 of Docker Desktop, windows server service MUST be enabled to
+install the software on your machine. Otherwise, it will not be installed. 
+
+[VERY IMPORTANT]: Make sure you login to Docker using command line using the command
+Docker login -u <username> when you are pulling and creating a container for the first time
+using respective image. After you run the command it will ask you for the password which
+is the same one you used while signing up for Docker.
+NOTE: 
+- You have to signup for Docker in the latest versions if you want to install and run containers
+using command line. You need to this action only when you are logged in with your account
+in your Docker desktop app but not via CMD.
+
+[IMPORTANT] : You need to download the docker-compose file for traditional selenium docker
+Grid images provided by Selenium community on their official source code repository. Here is the
+URL: https://github.com/SeleniumHQ/docker-selenium
+
+1. What is Docker?
+Ans: Docker is a technology that provides some lightweight containers/machines having different
+configurations of OS, Browsers and other application. We could extract/install these containers
+on any physical machine and start working on them as a physical machine only. 
+
+2. Where do you download the images to create machines of different configurations?
+Ans: Docker has a centralized repository to down the images of different configurations called Docker hub.
+We could download these images from Docker hub and extract them later on our local machine to
+create the containers of different configurations.
+
+3. Most of the images from Docker hub have only one OS configured by default i.e., Linux. Because
+Linux is very fast OS as compared to windows or MacoS that is why these images are built using Linux
+OS making the Docker containers fast.
+
+4. Major advantage with Docker is that we could create multiple containers with similar configuration using
+a single docker image. Let's say we want 3 machines with Windows OS and Chrome browser each we
+can create them using similar single docker image, which is not possible with VMs technology. Using VMs 
+we can create and use a VM with only single configuration at a time if we want one more VM with similar
+configuration then we would need to create an entirely different VM altogether.
+
+5. When we setup the Selenium node plus hub Docker containers using respective Docker images then this 
+combined setup is called Dockerized selenium Grid or Dockerized Grid.
+
+6. One LIMITATION with Docker technology is that it doesn't provide any image for SAFARI and MacOS
+combination. So, we couldn't do testing on Safari browser using Docker containers.
+
+7. Why Docker doesn't provide Safari and MaOS images?
+Ans: Because Apple doesn't support Docker technology.
+
+8. ADVANTAGES AND DISADVANTAGES OF DOCKER:
+---> ADVANTAGES:
+1. Docker images are very lightweight making making the execution of test cases fast.
+2. (MAJOR ADVANTAGE)Docker containers could scaled up and down very easily using just a single command 
+   and same docker image. So, tomorrow if we want more machines with similar configuration 
+   at the run time, we could do that using a single docker command and same image. 
+   With VM technology we would need to set up a different VM by installing different browser 
+   and OS combination which would take time. Also, to do that we would be required to pay again
+   for another VM.
+3. Docker technology itself is absolutely free. You need to buy only one system with Good configuration
+to setup docker containers on it.
+4. They ( Docker containers ) could be easily set up on cloud like AWS
+
+---> (INTERVIEW IMPORTANT) : For which execution remote or local, selenium needs the browser driver (chromedriver.exe etc) files in
+your local machine?
+Ans: Only for local execution selenium needs the driver exe files and selenium manager will download them internally on local machine. For remote
+execution selenium uses a JAR file named "selenium-standalone-server.jar" which will take care of the driver exe file internally and will
+download them on your local machine.
+
+--> Can we run docker containers without images?
+Ans: No. First we have to pull the image using "docker pull" command in our local and then we have to create and run the respective
+containers using "docker run" command.
+
+--> What is the difference between docker run and pull commands?
+Ans: Pull command just fetches the image from Docker hub to Docker desktop. But If we are using Docker run
+without pull then it will first check if the image is present in Docker desktop or not. If the image is not present
+then it will first execute Docker pull and then Docker run.
+So, Docker run = pull + run (If the image is not already there in local) but Docker run = Docker run
+(only when the image is already present).
+--> SYNTAX of Docker command to run 
+and create the containers: docker run -d -p 80:80 docker/getting-started
+Here, docker/getting-started is the image name. We could use any image name
+variable here.
+
+--> Docker Command to check number of images in the local: docker images
+
+--> Command to check number of containers in the local: docker ps -a
+NOTE:
+--> Here "ps" meaning process
+--> option "a" meaning all
+
+--> What is the purpose of -d flag in the docker run command?
+Ans: The -d flag is used to run the terminal from which the docker run command is executed in
+DETACHED mode. Meaning, the terminal will be made free or detached just after the 
+command is executed so that user could execute other commands in the same terminal. Otherwise,
+use has to open a new terminal every time the run command is executed.
+
+--> What is the purpose of -p flag in the docker run command?
+ Ans: The -p flag is used to specify the port number the specified container in the run should execute.
+ 
+ --> What are the numbers 80:80 in the run command?
+ Ans: These are port numbers. The number to the left of colon is port number of the local machine
+ on which the container will be running. The number to the right of colon is port number of the container.
+ Now, when we issue the run command using this port strategy first we get connected to the machine's
+ port number then we get forwarded and connected to the container's port number. This is called PORT
+ FORWARDING. Without first connected to the local machine's port we couldn't jump and directly connect
+ to the container's port.
+ 
+ -->  What happens when you execute the docker run command on the same port
+ which already has running container?
+ Ans: The command gives an error message saying the port is already allocated.
+ 
+ --> What is Docker-compose? Why is it useful for setting up Selenium Grid on Docker?
+ Ans:  - Docker-compose is a powerful docker tool that helps install and run the required images 
+ and their respective containers by giving all the details in a .yml file.
+ -  Docker-compose.yml file file is useful because all the commands, image names
+ etc. required to set up the containers and in turn the Selenium Grid
+ are already provided in this file by Selenium team. So, no need to remember every image name,
+ commands and other syntax to set up basic Selenium Grid on Docker.
+ 
+ - The dependee container (the one written under depends_on section in the docker-compose.yml file) 
+ which will be downloaded created first by the Docker-compose because if it's not created and some other
+ containers which are dependent on it are created already then they might give an error.
+ But images will be downloaded in the same sequence they are written in the compose.yml file. 
+ 
+ - [VERY IMPORTANT] - All the services and sections written under various sections in the compose file
+ should be at the same level to indicate the symmetry of same sections. If the sections are not aligned
+ properly the compose file will not run.
+ 
+ - [INTERVIEW]: Command to run the compose.yml file: docker-compose up -d
+ 
+ - Command to scale up/increase specific container (E.g. Chrome browser node)
+ using Docker-compose file: docker-compose up -d 
+ --scale <service-name>=<number-by-which-you-want-to-increase-the-containers>
+ NOTE: The above scale command doesn't provide "n" additional containers 
+ apart from the one which is already running. This means that it will increase the total number
+ of running containers of that service by "n".
+ 
+ - [INTERVIEW]: What happens when we execute multiple docker scale commands?
+ Ans: The containers specified in the latest scale command will be increased by the number specified
+ in the command. Rest all containers' size will reset to 1. For eg: if we are increasing the FF
+ browser version in the current scale command to 2 and we already have 3 chrome, 1 FF
+ and 1 Edge running, then the latest scale command will increase the FF number to 2 and 
+ reduce the chrome and edge containers' size to 1. So, 2 FF, 1 Chrome, 1 Egde.
+ To prevent this scale command from deleting old containers use multiple scale in single command like
+ below:
+ docker-compose up -d --scale firefox=2 --scale chrome=3. Now, this command will maintain
+ firefox number to 2 and chrome to 3 but Edge will again be reduced to 1.
+ 
+ ---> Command to check inside a container: docker logs <containerID>
+ Above command shows what happened inside a container at a particular time
+ through logs
+ 
+ ---> Command to stop all the docker container infrastructure: docker-compose down

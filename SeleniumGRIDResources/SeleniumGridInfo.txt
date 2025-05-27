@@ -1,0 +1,23 @@
+---> Selenium Grid is not a programming language or tool or a component, it is just a concept for setting/designing
+remote execution environment.
+
+---> What is the default password for Selenium Grid sessions?
+Ans: The password is "secret"
+---> On which port does Selenium hub runs on by default?
+ Ans: 4444
+
+---> Pros and Cons of Selenium Grid?
+Ans: CONS:
+1. Setting up Selenium Grid is expensive if we require our tests to be executed
+on a large number of machines with different OS+Browser combinations. In that case
+we need to procure different nodes/machines with different OS+Browser combinations.
+2.  Maintenance of Selenium Grid nodes and hub is very tedious. Suppose the nodes or
+hub are getting shutdown or some other failures is happening then who is going to look
+after it.
+
+PROS:
+1. Supports parallel testing. please note that it only supports the parallel testing
+by giving infrastructure but it actually doesn't provide any capability of parallel execution.
+That is given by testNG only.
+2. It supports Cross browser and platform testing.
+3. It supports cross browser version testing

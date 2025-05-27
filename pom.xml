@@ -5,34 +5,36 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>NaveenAutomatioCoursePOMSessions</groupId>
-	<artifactId>NaveenAutomatioCoursePOMSessions</artifactId>
+	<groupId>NaveenAutomationCoursePOMSessions</groupId>
+	<artifactId>NaveenAutomationCoursePOMSessions</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<name>NaveenAutomatioCoursePOMSessions</name>
+	<name>NaveenAutomationCoursePOMSessions</name>
 	<!-- FIXME change it to the project's website -->
-	<url>http://www.example.com</url>
+	<url>https://naveenautomationlabs.com/opencart</url>
 
 	<properties>
-		<!-- 1. The properties section of an xml file contains some user defined
-				variables with some values which can later be used in the Dependencies, 
-				Plugins sections etc.
-	  			2. Advantges of using variables in the XML files is we don't need to hardcode
-	  	 		the values of version numbers in various dependencies, plugins in the
-				respective sections. -->
+		<!-- 1. The properties section of an xml file contains some user defined 
+			variables with some values which can later be used in the Dependencies, Plugins 
+			sections etc. 2. Advantges of using variables in the XML files is we don't 
+			need to hardcode the values of version numbers in various dependencies, plugins 
+			in the respective sections. -->
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.22</maven.compiler.source>
 		<maven.compiler.target>1.22</maven.compiler.target>
 		<extentreports-version>5.1.2</extentreports-version>
 		<aspectj.version>1.9.22.1</aspectj.version>
+		<surefire.argline>
+			-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+		</surefire.argline>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>4.23.0</version>
+			<version>4.31.0</version>
 		</dependency>
 
 		<dependency>
@@ -92,8 +94,8 @@
 		<dependency>
 			<groupId>com.aventstack</groupId>
 			<artifactId>extentreports</artifactId>
-			<!--extentreports-version is the variable created under Properties
-			section of this XML file and used here-->
+			<!--extentreports-version is the variable created under Properties section 
+				of this XML file and used here -->
 			<version>${extentreports-version}</version>
 		</dependency>
 
@@ -107,9 +109,7 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>${aspectj.version}</version>
 		</dependency>
-
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -124,22 +124,44 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.5.0</version>
+				<version>3.5.3</version>
 				<configuration>
 					<forkCount>3</forkCount>
 					<reuseForks>true</reuseForks>
+
 					<suiteXmlFiles>
-						<!--<suiteXmlFile> src/test/resources/testrunners/testng_regression.xml</suiteXmlFile>-->
-						<suiteXmlFile>${suiteXmlFile}</suiteXmlFile> <!--We are giving variable in the filename
-						in the suiteXmlfile tag here because we will pass this as a variable from the Jenkinsfile 
-						to pick corresponding testng runner files. This parameter need not be exactly same as the Jenkinsfile
-						parameter--> 
+						<suiteXmlFile>src/test/resources/testrunners/testng_regression.xml</suiteXmlFile>
 					</suiteXmlFiles>
+
+					<!-- <suiteXmlFiles> <suiteXmlFile>${suiteXmlFile}</suiteXmlFile> </suiteXmlFiles> 
+						We are giving variable in the filename in the suiteXmlfile tag here because 
+						we will pass this as a variable from the Jenkinsfile to pick corresponding 
+						testng runner files. This parameter need not be exactly same as the Jenkinsfile 
+						parameter -->
 					<argLine>
-						-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+						${surefire.argline}
 					</argLine>
 				</configuration>
 			</plugin>
+
+			<!-- Maven failsafe and surefire report plugin integration (for generating 
+				reports) -->
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-surefire-report-plugin</artifactId> 
+				<version>3.5.3</version> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+				<artifactId>maven-failsafe-plugin</artifactId> <version>3.5.3</version> <configuration> 
+				<suiteXmlFiles> <suiteXmlFile>src/test/resources/testrunners/testng_integration_regression.xml</suiteXmlFile> 
+				</suiteXmlFiles> <includes> <include>**/*Test.java</include> </includes> 
+				</configuration> <executions> <execution> <goals> <goal>integration-test</goal> 
+				<goal>verify</goal> </goals> </execution> </executions> </plugin> <plugin> 
+				<groupId>org.apache.maven.plugins</groupId> <artifactId>maven-site-plugin</artifactId> 
+				<version>3.21.0</version> </plugin> -->
 		</plugins>
 	</build>
+
+	<!-- Maven surefire report plugin reporting section (for generating reports) -->
+	<!-- <reporting> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+		<artifactId>maven-surefire-report-plugin</artifactId> <version>3.5.3</version> 
+		<reportSets> <reportSet> <id>integration-tests</id> <reports> <report>failsafe-report-only</report> 
+		<report>report-only</report> </reports> </reportSet> </reportSets> </plugin> 
+		</plugins> </reporting> -->
 </project>

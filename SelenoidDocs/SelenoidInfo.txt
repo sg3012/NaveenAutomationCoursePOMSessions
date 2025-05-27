@@ -1,0 +1,49 @@
+[IMPORTANT]: You need to download the docker-compose file for selenoid docker
+Grid images provided by Aerokube/Selenoid community on their official source code repository. 
+Here is the URL: https://github.com/SeleniumHQ/docker-selenium
+
+[VERY IMPORTANT]: To change the running port for Selenoid UI use the following option:
+<desired-port-number>:8080
+NOTE: Make sure you MUST use the port number after colon as 8080 only. Because Selenoid UI runs
+on port 8080 by default. If you use a different port after colon then Selenoid UI might
+or might not run ( It may not be stable )
+
+---> What is Selenoid?
+Ans: Selenoid is a Selenium Grid infrastructure implemented on top of Docker containers technology. It is
+developed by company Aerokube and written in GoLang.
+It is very fast as compared to traditional Selenium Grid infrastructure.
+
+---> To use the Selenoid Grid we need to install the browser node (chrome, firefox, opera etc.) images 
+provided by Selenoid community itself. We don't need to use the browser node images 
+provided by Selenium.
+
+---> Selenoid provides one additional container named Selenoid UI apart from the hub and browser node
+containers which are also provided by Traditional Selenium Grid on Docker hub. Selenoid UI
+is used to visualize the running test cases in real-time
+
+---> Apart from the docker-compose.yml file we need one additional file named browsers.json file to
+configure selenoid infrastructure
+
+---> One additional and important advantage given by Selenoid is that you can run your tests on DIFFERENT
+VERSIONS (lower or higher) of your browser than the current version. 
+
+---> [IMPORTANT]:  Make sure you don't have another service running on the same port as mentioned
+in the docker-compose file for selenoid under "Selenoid UI" service. By default Selenoid UI runs on port 8080
+and Jenkins also run on the same port. So, if you have Jenkins instance running on the same port
+then make sure you either change the port for Jenkins or Selenoid UI service in compose file.
+
+---> Command to create a network line in Selenoid: docker network create "<exact network-name-under
+networks section of docker compose file>"
+
+--> What are the steps to run a docker-compose file for Selenoid Grid? OR
+What are the steps to pull the images and run respective containers using
+docker-compose for Selenoid Grid?
+Ans: 
+1. First create a network line using command:
+docker network create "<exact network-name-under
+networks section of docker compose file>" [This is a MUST step
+before issuing the up command. If the network line is not created
+then up command will throw an error]
+
+2. Next issue the command: docker-compose up -d
+
