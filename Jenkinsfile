@@ -1,3 +1,8 @@
+def mvn(String goals) {
+  withMaven(maven: 'Maven-3.9.9') {
+    bat "mvn ${goals}"
+  }
+}
 pipeline 
 {
     agent any
