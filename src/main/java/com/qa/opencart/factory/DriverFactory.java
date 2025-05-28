@@ -312,8 +312,9 @@ public class DriverFactory {
 		// Maven COMPILER plug-in: It is used to compile
 		// our JAVA code written under src\main\java
 		// and src\test\java.
-		// Maven SUREFIRE plug-in: It is used to run our
-		// test scripts written in JAVA code, via test runner file
+		// Maven SUREFIRE plug-in: It is used to create
+		// a new JVM process and trigger the testNG library
+		// to run our tests
 		
 		// STEPS:
 		// --> Now, add these plug-ins under Plug-ins --> Plugin

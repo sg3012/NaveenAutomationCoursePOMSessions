@@ -1,5 +1,14 @@
+// The def block below is used to tell the pipeline(s)
+// to use the maven we have configured in Manage Jenkins > tools
+// page under Maven integration section. The block also
+// helps run all the pipeline code to run inside 
+// using Maven integration plugin
+// which will allow pipeline to follow the values
+// provided under Default settings provider and Default
+// global settings provider drop-downs on Manage jenkins > tools page
+
 def mvn(String goals) {
-  withMaven(maven: 'Maven-3.9.9') {
+  withMaven(maven: 'maven3.9.9') {
     bat "mvn ${goals}"
   }
 }

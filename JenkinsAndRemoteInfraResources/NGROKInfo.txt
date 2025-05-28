@@ -5,10 +5,15 @@ Use this commad on WINDOWS: ngrok authtoken <auth-token-copied-from-NGROk-WebApp
 When we run the above command the authtoken gets saved in ngrok.yml file in your local system.
 
 - How to connect your NGROK app with the Jenkins server?
-Ans: Use the following command on Windows after navigating to the directory
+Ans: - Use the following command on Windows after navigating to the directory
 in which NGROK is installed: ngrok http <port-number-on-which-Jenkins-is-running>. By
 default the port number of Jenkins will be 8080. After you run this command your ngrok
 proxy server will be launched with some details displayed about server.
+
+- Once NGROK starts running it's URL is automatically redirected to the Jenkins URL with
+port 8080. So, we could say that NGROK is indirectly running on Jenkins URL and port.
+
+
 
 - How to add webhooks to a GitHub project repo?
 Ans: Steps are as follows:
