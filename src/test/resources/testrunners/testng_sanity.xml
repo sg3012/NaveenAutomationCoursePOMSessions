@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="Open Cart App Test Sanity Suite"  thread-count="4" parallel="tests"  verbose="3">
+<suite name="Open Cart App Test Sanity Suite" thread-count="4"
+	parallel="tests" verbose="3">
 	<listeners>
-		<listener class-name="com.qa.opencart.listeners.ExtentReportListener"/>
-		<listener class-name="com.qa.opencart.listeners.TestAllureListener"/>
+		<listener
+			class-name="com.qa.opencart.listeners.ExtentReportListener" />
+		<listener
+			class-name="com.qa.opencart.listeners.TestAllureListener" />
 		<!-- Providing Retry Listener at the suite level (For all tests at once) -->
-		<listener class-name="com.qa.opencart.listeners.AnnotationTransformer"/>
+		<listener
+			class-name="com.qa.opencart.listeners.AnnotationTransformer" />
 	</listeners>
 
 	<test name="Login Page Test">
+		<parameter name="browser" value="chrome"></parameter>
+		<parameter name="browserVersion" value="126"></parameter>
+		<parameter name="testname" value="Login Page Test"></parameter>
 		<classes>
 			<class name="com.qa.opencart.tests.LoginPageTest" />
 		</classes>
 	</test>
-	
+
 </suite>
