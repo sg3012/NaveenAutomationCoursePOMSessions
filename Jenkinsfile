@@ -7,11 +7,11 @@
 // provided under Default settings provider and Default
 // global settings provider drop-downs on Manage jenkins > tools page
 
-def mvn(String goals) {
+/*def mvn(String goals) {
   withMaven(maven: 'maven3.9.9') {
     bat "mvn ${goals}"
   }
-}
+}*/
 pipeline 
 {
     agent any
