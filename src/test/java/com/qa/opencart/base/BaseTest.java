@@ -50,7 +50,7 @@ public class BaseTest {
 	// Also, we have made the SoftAssert ref. as protected
 	// so that we can access it inside the child classes
 	// of BaseTest in a different than baseTest.
-	@Parameters({"browser","browserVersion","testname"})
+	 @Parameters({"browser"})
 	// 1. Passing parameters annotation here
 	// we could read the browser,browserVersion parameters from the testNG file
 	// when we want to run our tests on cross-bowser, in parallel
@@ -58,7 +58,8 @@ public class BaseTest {
 	// String browserName, String browserVersion,
 	// String testName
 	@BeforeTest
-	public void setUp(String browserName, String browserVersion, String testName) {
+	//public void setUp(String browserName, String browserVersion, String testName) {
+	  public void setUp(String browserName) {
 		df = new DriverFactory();
 		prop = df.initProp();
 		
@@ -71,14 +72,14 @@ public class BaseTest {
 			// So that we could run our tests on cross browsers, in parallel
 			// and on different browser versions.
 			prop.setProperty("browser", browserName);
-			prop.setProperty("browserversion", browserVersion);
+			// prop.setProperty("browserversion", browserVersion);
 			// This testname parameter will be read
 			// from the parameters of testng_regression.xml runner file
 			// and set in the respective properties file
 			// to the the testname which is coming from 
 			// runner file. So, that the currently running 
 			// testname could be displayed on the Selenoid container
-			prop.setProperty("testname", testName);
+			// prop.setProperty("testname", testName);
 			
 		}
 		

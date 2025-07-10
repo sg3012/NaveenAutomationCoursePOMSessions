@@ -1,7 +1,172 @@
 --> Which AWS service is used to create machine(s) with different configurations?
-Ans: Compute Service
+Ans: Compute > EC2 service
+
+--> [IMPORTANT]: Why AWS has given the name EC2 to one of their compute services?
+Ans: EC2 is an abbreviation for Elastic Compute Cloud. C repeats twice that's why C2
 
 --> We need to create some security groups to access different applications and even the AWS machines
 itself under different security protocols. These security groups are often called as virtual firewalls.
 Through security groups we could access selenoid grid on 4444, selenoid UI on 8080, ssh connections
 for login and accessing those machine etc. 
+
+--> While selecting subnet value under network settings section while creating and configuring an EC2 instance for AWS
+you should do the following steps:
+  --> First you should select nearest data center to your physical location using location drop-down from the top-right
+         corner of AWS mgmnt. console page.
+  --> Then you should select the nearest subnet based on the availability zone, from the corresponding drop-down.
+  
+--> The default port number of SSH is 22 always. And SSH is used for remote login to the AWS machines. Infact, one of the
+most important applications of SSH is remote login to the machines.
+
+--> We have to enable/create the following security groups while creating and configuring the AWS instance:
+      - Security group name - any group name of your choice
+      - Description - any meaningful description
+      
+        SECURITY GROUP RULE 1(SSH):
+      - Type: SSH
+      - SSH:
+         Protocol - TCP
+         Port - 22
+      - Source type: 
+         Select "any" or "MyIP" or "Anywhere" from the drop-down based on your requirement
+         
+        SECURITY GROUP RULE 2(Custom TCP):
+       - Type - Custom TCP selected
+       - Port range:
+          Port number of the selenoid-UI 8080 for Selenoid
+       - Source type: Select any of the following according to your requirements
+          "Anywhere" - Any machine's IP address could access the AWS instance/machine in the world
+          "Custom" - A custom IP address range defined by the AWS root user could access 
+          the AWS instance/machine
+          "My IP" - The machine's IP address from which the AWS created and configured could
+          only access the AWS instance
+         - Description - Any meaningful description like Selenoid-UI
+         
+         
+         SECURITY GROUP RULE 3(Custom TCP):
+       - Type - Custom TCP selected
+       - Port range:
+          Port number of the selenium grid hub i.e., 4444 
+       - Source type: Select any of the following according to your requirements
+          "Anywhere" - Any machine's IP address could access the AWS instance/machine in the world
+          "Custom" - A custom IP address range defined by the AWS root user could access 
+          the AWS instance/machine
+          "My IP" - The machine's IP address from which the AWS created and configured could
+          only access the AWS instance
+         - Description - Any meaningful description like Selenium-GRID-Hub
+         
+ --> Fill Configure storage section like this:
+        - Click Advanced option in the section
+        - Provide 32 in the size(GiB) field --> This is the size of the volume(Hard disk or SSD) on the AWS instance
+        
+ PRE-REQUISITE:       
+--> When you click on the instance ID and go to instance details page there is one public IP address displayed.
+Copy the PUBLIC IP address and replace the localhost string in your config.properties files in your codebase by this IP address
+value. So that your tests could launch on the AWS machine
+
+--> [INTERVIEW] Command used to login to the AWS EC2 instance using .PEM file?
+Ans: Below are the steps to connect to the ec2 instance 
+- First run the command: ssh -i <pem-file-name-alongwith-extension> ec2-user@<public-IPv4-address-of-instance>
+NOTE: The public IPv4 address is the address displayed on the instance details page when you click the instance ID
+- Type yes on the question - Are you sure you want to continue connecting (yes/no/[fingerprint])?
+- As soon as you type yes, your ssh connection is successfully establishes using the pem file.
+
+-->[INTERVIEW] What are the software required to be installed in the AWS machine for
+running your automated tests?
+Ans: Following software are required to be installed:
+- JAVA
+- Docker
+- Docker-Compose
+
+--> [INTERVIEW] What are the steps you would do on a running AWS instance before
+running any tests?
+Ans: 
+- Install the required software like JAVA, Docker, Docker-compose etc.
+- create bowsers.json, docker-compose.yml files for selenoid or docker-compose.yml for Docker 
+   on the machine to create the Selenium GRID.
+- Edit those files and copy the content from your local machine in those files (See below on
+how to create those file and copy the content) 
+
+--> [INTERVIEW] How to install a software on an AWS instance/machine?
+Ans: To install a software on an AWS instance like JDK we have to use the YUM installer for Linux machines. Use
+the following commands to install the software:
+       INSTALL JDK:
+    - First update the version of "yum": sudo yum update -y
+    - Next remove any JDK already installed on the machine: sudo yum remove java -y
+    - Next install the latest version of JDK: sudo yum install <java_JDK_name like java-1.8.0-openjdk>
+       
+        INSTALL AND RUN DOCKER:
+    - Command to install docker: sudo yum install docker -y
+    - Command to run docker: sudo service docker start
+    
+        INSTALL DOCKER COMPOSE TOOL:
+      - Command: sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    NOTE:
+    - Run the sudo commands from the same terminal where you ran the .pem file to interact with AWS instance
+    - We are using sudo commands here because the .pem files run in the bash shell, which is the default
+       terminal of Linux/Unix based systems like MacOS or Ubuntu or Linux terminal itself. 
+       
+--> [INTERVIEW] How to start a service on AWS machine?
+Ans: Let's say we have to start docker service on the machine then we will use the following command:
+Command - sudo service docker start
+
+--> [IMPORTANT-INTERVIEW] To Run all the docker commands like docker ps, docker run etc. on AWS instance in 
+the bash shell/terminal use SUDO(lower case) before every command so that terminal recognizes you as admin user.
+
+--> [INTERVIEW] How to move docker-compose file from the default installation directory to any other
+directory on AWS instance?
+Ans: Let's say we have to move the docker-compose.yml file from user/local/bin to user/bin folder
+we will use the following command: sudo mv /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+--> [INTERVIEW] Before running any docker-compose command on the  AWS instance you have to give admin 
+permission to the current user to the usr/local/bin or usr/bin directory like this:
+sudo chmod +x /usr/local/bin/docker-compose --> To /usr/local/bin
+sudo chmod +x /usr/bin/docker-compose --> To /usr/bin
+
+--> [IMPORTANT-INTERVIEW] How to close the connection of your machine to the AWS instance using command line?
+Ans: Just type the command "exit" in the same terminal from which you ran the ssh command to connect
+your machine to the instance using .pem file.
+
+--> [IMPORTANT] How to create browser.json, docker-compose.yml etc. files on your AWS instance?
+Ans: Use the TOUCH and VI commands as follows:
+a) FOR SELENOID's browsers.json file:
+    --> run command "touch browsers.json" and it will create a blank file in the current directory
+    --> run the command "vi browsers.json" to open the file
+    --> type "i" on the keyboard to enter the INSERT mode in the file
+    --> copy the content of browsers.json file from your local system and paste all of it
+           inside the one on AWS machine
+    --> type :wq! to leave the insert/edit mode and save the file
+    
+b) FOR SELENOID's docker-compose.yml file:
+    --> run command "touch docker-compose.yml" and it will create a blank file in the current directory
+    --> run the command "vi docker-compose.yml" to open the file
+    --> type "i" on the keyboard to enter the INSERT mode in the file
+    --> copy the content of docker-compose.yml file for SELENOID from your local system and paste all of it
+           inside the one on AWS machine
+    --> type :wq! to leave the insert/edit mode and save the file
+    
+ c) FOR DOCKER's docker-compose.yml file:
+    --> run command "touch docker-compose.yml" and it will create a blank file in the current directory
+    --> run the command "vi docker-compose.yml" to open the file
+    --> type "i" on the keyboard to enter the INSERT mode in the file
+    --> copy the content of docker-compose.yml file for DOCKER from your local system and paste all of it
+           inside the one on AWS machine
+    --> type :wq! to leave the insert/edit mode and save the file
+          
+         
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+     

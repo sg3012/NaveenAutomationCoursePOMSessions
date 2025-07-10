@@ -13,7 +13,7 @@
 	only 10 tests , in the test report the we create at the end of each test 
 	execution. Because the one with 50 tests will be completing later and the 
 	test report may contain only the data for the class with 50 tests which is a DATA LOSS 
-	for the class with only 10 tests. So, OVERRIDDEN 
+	for the class with only 10 tests. So, OVERRIDDENoc 
 	test reports could be problem when the number of test cases and thread-count is LARGE.
 	
 	2.  To understand the second problem let us assume we have defined a large number of thread-count
@@ -25,7 +25,7 @@
 	state is also called DEADLOCK problem in multi-threading or parallel execution environment.
 	
 	So, to overcome these 2 problems we use a feature/class of JAVA called THREADLOCAL
-	which was introduced first in JDK 1.8. So, we can use this concept JDK 1.8 onwards.
+	which was introduced first in JDK 1.8. So, we canal use this concept JDK 1.8 onwards.
 	-->
 
 
@@ -48,11 +48,11 @@
 	<test name="Login Page Test">
 	<!-- WRITING BROWSER PARAMETERS HERE SO THAT WE COULD RUN OUR TESTS
 	ON CROSS BROWSERS IN PARALLEL -->
-		<parameter name="browser" value="firefox"></parameter>
-		<parameter name="browserVersion" value="125"></parameter>
+		<parameter name="browser" value="chrome"></parameter>
+		<!-- <parameter name="browserversion" value="113"></parameter> -->
 		<!-- TEST NAME PARAMETER WILL BE USED TO FETCH AND DISPLAY THE
 		CURRENTLY RUNNING TEST ON THE RESPECTIVE SELENOID CONTAINER -->
-		<parameter name="testname" value="Login Page Test"></parameter>
+		<!-- <parameter name="testname" value="Login Page Test"></parameter> -->
 		<classes>
 			<class name="com.qa.opencart.tests.LoginPageTest" />
 		</classes>
@@ -60,29 +60,29 @@
 
 	<test name="Accounts Page Test">
 		<parameter name="browser" value="firefox"></parameter>
-		<parameter name="browserVersion" value="100"></parameter>
-		<parameter name="testname" value="Accounts Page Test"></parameter>
+		<!-- <parameter name="browserversion" value="90"></parameter>
+		<parameter name="testname" value="Accounts Page Test"></parameter> -->
 		<classes>
 			<class name="com.qa.opencart.tests.AccountsPageTest" />
 		</classes>
 	</test>
 
 	<test name="ProductInfo Page Test">
-		<parameter name="browser" value="chrome"></parameter>
-		<parameter name="browserVersion" value="126"></parameter>
-		<parameter name="testname" value="ProductInfo Page Test"></parameter>
+		<parameter name="browser" value="edge"></parameter>
+		<!-- <parameter name="browserversion" value="79"></parameter>
+		<parameter name="testname" value="ProductInfo Page Test"></parameter> -->
 		<classes>
 			<class name="com.qa.opencart.tests.ProductInfoTest" />
 		</classes>
 	</test>
 
-	<test name="Register Page Test">
+	<!-- <test name="Register Page Test">
 	<parameter name="browser" value="chrome"></parameter>
 	<parameter name="browserVersion" value="90"></parameter>
 	<parameter name="testname" value="Register Page Test"></parameter>
 		<classes>
 			<class name="com.qa.opencart.tests.RegisterPageTest" />
 		</classes>
-	</test>
+	</test> -->
 
 </suite>

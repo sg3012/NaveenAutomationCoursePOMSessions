@@ -160,7 +160,7 @@ public class DriverFactory {
 	 * @param browserName
 	 */
 	private void init_remoteDriver(String browserName) {
-		
+
 		System.out.println("Running tests on GRID with browser: "+browserName);
 		
 		try {
@@ -170,18 +170,24 @@ public class DriverFactory {
 				url = uri.toURL();
 				tldriver.set(new RemoteWebDriver(
 						url, optionsManager.getChromeOptions()));
+				System.out.println("Chrome Browser version: " +((RemoteWebDriver)getDriver())
+						.getCapabilities().getBrowserVersion());
 				break;
 			case "firefox":
 				uri = new URI(prop.getProperty("huburl"));
 				url = uri.toURL();
 				tldriver.set(new RemoteWebDriver(
 						url, optionsManager.getFirefoxOptions()));
+				System.out.println("Firefox Browser version: " +((RemoteWebDriver)getDriver())
+						.getCapabilities().getBrowserVersion());
 				break;
 			case "edge":
 				uri = new URI(prop.getProperty("huburl"));
 				url = uri.toURL();
 				tldriver.set(new RemoteWebDriver(
 						url, optionsManager.getEdgeOptions()));
+				System.out.println("Edge Browser version: " +((RemoteWebDriver)getDriver())
+						.getCapabilities().getBrowserVersion());
 				break;
 			default:
 				System.out.println("Wrong browser info....cannot run on "

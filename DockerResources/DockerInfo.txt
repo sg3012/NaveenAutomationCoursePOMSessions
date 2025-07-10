@@ -1,6 +1,14 @@
 [IMPORTANT]: Starting version 4.37.1 of Docker Desktop, windows server service MUST be enabled to
 install the software on your machine. Otherwise, it will not be installed. 
 
+[IMPORTANT]: If you experience 401 unauthorized issue while running docker commands using CLI login to the docker using
+command "docker login -u <username> -p <password>". Once logged in you will again be able to use the commands like
+docker run, docker ps etc.  
+NOTE: Doc showing how to use the option --password-stdin option using CMD: https://github.com/moby/moby/issues/35746 
+
+[IMPORTANT]: Upgrade Docker desktop to latest version using 
+CHOCOLATEY - In CMD run command "choco upgrade docker-desktop -y" 
+
 [VERY IMPORTANT]: Make sure you login to Docker using command line using the command
 Docker login -u <username> when you are pulling and creating a container for the first time
 using respective image. After you run the command it will ask you for the password which
@@ -131,11 +139,11 @@ use has to open a new terminal every time the run command is executed.
  apart from the one which is already running. This means that it will increase the total number
  of running containers of that service by "n".
  
- - [INTERVIEW]: What happens when we execute multiple docker scale commands?
+ - [INTERVIEW]: What happens when we execute multiple docker compose command with scale flag one by one in multiple lines?
  Ans: The containers specified in the latest scale command will be increased by the number specified
  in the command. Rest all containers' size will reset to 1. For eg: if we are increasing the FF
  browser version in the current scale command to 2 and we already have 3 chrome, 1 FF
- and 1 Edge running, then the latest scale command will increase the FF number to 2 and 
+ and 4 Edge browsers running, then the latest scale command will increase the FF number to 2 and 
  reduce the chrome and edge containers' size to 1. So, 2 FF, 1 Chrome, 1 Egde.
  To prevent this scale command from deleting old containers use multiple scale in single command like
  below:
@@ -147,3 +155,26 @@ use has to open a new terminal every time the run command is executed.
  through logs
  
  ---> Command to stop all the docker container infrastructure: docker-compose down
+ 
+ --> [IMPORTANT] How to check any browser node version in the Selenium Grid which is created using Docker?
+ Ans: 
+ -- First run the command : docker exec -it <containerIDorNameofTheNode> bash -c "ls -l /usr/bin /usr/local/bin /opt/bin"
+ To see the list of all executables/commands you can run inside docker exec command. 
+ In the output of this command you will some executables listed under usr/bin directory. 
+ Look for the name of your desired browser executable name (For e.g. - google-chrome) and you need to use that name
+ in the docker exec command along with the --version flag.   
+ -- Use the command : docker exec <containerIDorNameofTheNode> <desiredbrowserexecutablename> --version. 
+ For e.g. -  docker exec seleniumdockercomposefile-chrome-1 google-chrome  --version
+ 
+ --> How to check each browser version which will open while executing tests in each selenium Grid node 
+ which is created using Docker containers?
+ Ans: Open following URL in any browser: http://localhost:4444/status
+ 
+ --> How to delete all images and containers at once through command line?
+ Ans : The command is : docker system prune -a
+ NOTE: Above command will only delete the images and containers which are not associated with each other. Meaning,
+ it will delete all those containers which are not running using any image, along with the images.
+ 
+ --> docker network ls - to list all the conatiners with their IDs, names etc.
+ --> docker network rm <networkIdOrName> - to delete a specific docker network
+ --> 

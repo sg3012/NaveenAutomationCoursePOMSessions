@@ -5,6 +5,8 @@ remote execution environment.
 Ans: The password is "secret"
 ---> On which port does Selenium hub runs on by default?
  Ans: 4444
+ 
+ ---> Every Selenium Grid node along with the hub need a different machine (physical or virtual) with different configuration to run.
 
 ---> Pros and Cons of Selenium Grid?
 Ans: CONS:

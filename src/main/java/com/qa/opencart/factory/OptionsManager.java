@@ -48,7 +48,7 @@ public class OptionsManager {
 			// opening of the browser and see the running tests
 			// on remote machines. If we don't set it we will not
 			// see any browser opening on the remote machine
-			co.setBrowserVersion(prop.getProperty("browserversion").trim()); // Setting
+			// co.setBrowserVersion(prop.getProperty("browserversion").trim()); // Setting
 			// the browserversion using the same variable
 			// from the properties file which is set at run time
 			// in the base test. We are setting browser version capability
@@ -60,16 +60,16 @@ public class OptionsManager {
 			// screen resolution for running tests, 
 			// enable VNC to true so that we could
 			// see our running tests in real-time etc
-			Map<String,Object> selenoidOptions = new HashMap<>();
-			selenoidOptions.put("screenResolution", "1280x1024x24");
-			selenoidOptions.put("enableVNC", true);
-			// This test name capability will be read
-			// here from the properties file to be
-			// supplied as the test name visible
-			// on the selenoid container running the
-			// test
-			selenoidOptions.put("name", prop.getProperty("testname"));
-			co.setCapability("selenoid:options", selenoidOptions);
+//			Map<String,Object> selenoidOptions = new HashMap<>();
+//			selenoidOptions.put("screenResolution", "1280x1024x24");
+//			selenoidOptions.put("enableVNC", true);
+//			// This test name capability will be read
+//			// here from the properties file to be
+//			// supplied as the test name visible
+//			// on the selenoid container running the
+//			// test
+//			selenoidOptions.put("name", prop.getProperty("testname"));
+//			co.setCapability("selenoid:options", selenoidOptions);
 		}
 		
 		return co;
@@ -91,14 +91,20 @@ public class OptionsManager {
 		}
 		if(Boolean.parseBoolean(prop.getProperty("remote"))) {
 			fo.setCapability("browserName", "firefox");
-			//fo.setCapability("enableVNC", true);
-			fo.setBrowserVersion(prop.getProperty("browserversion").trim());
+//			fo.setCapability("enableVNC", true);
+		    //fo.setBrowserVersion(prop.getProperty("browserversion").trim());
 		}
 		return fo;
 	}
 	
 	public EdgeOptions getEdgeOptions() {
 		eo = new EdgeOptions();
+		eo.addArguments("--edge-skip-compat-layer-relaunch"); // This argument is added to prevent below
+		// exception from occurring while executing tests on local Edge browser:
+//		org.openqa.selenium.SessionNotCreatedException: Could not start a new session. 
+//		Response code 500. Message: session not created: probably user data directory is 
+//		already in use, please specify a unique value for --user-data-dir argument, 
+//		or don't use --user-data-dir
 		if(Boolean.parseBoolean(prop.getProperty("headless"))) { // We have converted
 			// the value returned from getProperty method to boolean
 			// because everything key and value in the properties
@@ -112,7 +118,9 @@ public class OptionsManager {
 			eo.addArguments("--incognito");
 		}
 		if(Boolean.parseBoolean(prop.getProperty("remote"))) {
-			eo.setCapability("browserName", "edge");
+			eo.setCapability("browserName", "MicrosoftEdge"); // Pass MicrosoftEdge only here as the 
+			// capability, otherwise the remote execution on Edge browser will not work
+			// using Selenium Grid on Docker
 			//eo.setCapability("enableVNC", true);
 		}
 		return eo;
