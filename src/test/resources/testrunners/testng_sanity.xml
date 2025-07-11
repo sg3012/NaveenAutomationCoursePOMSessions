@@ -15,8 +15,8 @@
 
 	<test name="Login Page Test">
 		<parameter name="browser" value="chrome"></parameter>
-		<parameter name="browserVersion" value="126"></parameter>
-		<parameter name="testname" value="Login Page Test"></parameter>
+		<!-- <parameter name="browserVersion" value="126"></parameter>
+		<parameter name="testname" value="Login Page Test"></parameter> -->
 		<classes>
 			<class name="com.qa.opencart.tests.LoginPageTest" />
 		</classes>
