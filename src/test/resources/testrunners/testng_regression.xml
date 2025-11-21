@@ -25,8 +25,9 @@
 	state is also called DEADLOCK problem in multi-threading or parallel execution environment.
 	
 	So, to overcome these 2 problems we use a feature/class of JAVA called THREADLOCAL
-	which was introduced first in JDK 1.8. So, we canal use this concept JDK 1.8 onwards.
-	-->
+	which was introduced first in JDK 1.8. So, we canuse this concept JDK 1.8 onwards to avoid
+	the conflicting of threads while parallel execution and generate incorrect test reports with 
+	incorrect results -->
 
 
 <suite name="Open Cart App Test Regression Suite"  thread-count="4" parallel="tests"  verbose="2">
@@ -42,6 +43,7 @@
 		<listener class-name="com.qa.opencart.listeners.TestAllureListener"/>
 		<!-- Providing Retry Listener at the suite level (For all tests at once) -->
 		<listener class-name="com.qa.opencart.listeners.AnnotationTransformer"/>
+		<listener class-name="com.qa.opencart.listeners.ItextPdfListener"/>
 	</listeners>
 	
 	
@@ -59,7 +61,7 @@
 	</test>
 
 	<test name="Accounts Page Test">
-		<parameter name="browser" value="firefox"></parameter>
+		<parameter name="browser" value="chrome"></parameter>
 		<!-- <parameter name="browserversion" value="90"></parameter>
 		<parameter name="testname" value="Accounts Page Test"></parameter> -->
 		<classes>
@@ -68,7 +70,7 @@
 	</test>
 
 	<test name="ProductInfo Page Test">
-		<parameter name="browser" value="edge"></parameter>
+		<parameter name="browser" value="chrome"></parameter>
 		<!-- <parameter name="browserversion" value="79"></parameter>
 		<parameter name="testname" value="ProductInfo Page Test"></parameter> -->
 		<classes>
@@ -76,13 +78,13 @@
 		</classes>
 	</test>
 
-	<!-- <test name="Register Page Test">
+	<test name="Register Page Test">
 	<parameter name="browser" value="chrome"></parameter>
-	<parameter name="browserVersion" value="90"></parameter>
-	<parameter name="testname" value="Register Page Test"></parameter>
+	<!-- <parameter name="browserVersion" value="90"></parameter>
+	<parameter name="testname" value="Register Page Test"></parameter> -->
 		<classes>
 			<class name="com.qa.opencart.tests.RegisterPageTest" />
 		</classes>
-	</test> -->
+	</test>
 
 </suite>

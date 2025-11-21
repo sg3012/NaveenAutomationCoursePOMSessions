@@ -77,6 +77,10 @@ public class ElementUtil {
 	// UTIL TO FIND ELEMENT (See new getElement
 	// with highlight condition below)
 //	}
+	
+	public void util() {
+		
+	}
 
 	/**
 	 * Generic method to find an element and highlight if the highlight condition is

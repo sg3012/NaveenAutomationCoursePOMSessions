@@ -1,0 +1,6 @@
+- [IMPORTANT] - Maven command to skip tests from surefire plugin using CLI?
+Ans: mvn clean install -DskipTests=true (This command can also be used to create
+a FAT JAR using assembly plugin)
+
+- [IMPORTANT] - Maven command to skip running tests and deploy the JAR file create to nexus repository URL?
+Ans: mvn deploy -DskipTests=true (First we have to run the command to create JAR file using clean install)

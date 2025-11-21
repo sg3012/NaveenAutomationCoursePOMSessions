@@ -1,0 +1,119 @@
+- What is the different between normal JAR and the FAT JAR that Maven builds after running the project?
+Ans: 
+- The normal JAR only contains the code written in src/main/java folder but the FAT JAR contains the code
+written in the src/main/java folder plus all the maven dependencies' JAR files which are downloaded using pom.xml file
+like Selenium dependency JAR, testng JAR, allure JAR, extent JAR etc.
+
+[NOTE]: We don't need to include the test cases written in src/test/java in either of the normal or FAT JARs because
+when we create a framework which is generic so that other teams in the org. can use it, 
+all it's code written under utilities, page classes, constants folders only need to be reusable by those teams not
+the test cases for that project because other teams might be working on different projects having different tests.
+
+- The JAR that is created after running the Maven build is called a BUILD or ARTIFACT
+
+- The NEXUS server or repository is a centralized location containing all the JARs or artifacts for projects in a company,
+that are meant to be distributed inside the company only. So, Nexus repo is a private repo for companies.
+
+- Advantages of FAT JAR:
+--> The user doesn't have to explicitly include the dependencies in his/her pom file on which
+the FAT JAR is dependent  because all of them will already be included in the FAT JAR. So, the user just has 
+to include the dependency of the FAT jar itself and rest all dependencies required by the 
+project in the FAT JAR will automatically be downloaded.
+
+--> The other advantage is that the user just has to concentrate on writing the code for
+the actual test cases (test classes), page actions (page classes) for pages. The rest of the code for 
+some other things like generic utilities for common page actions, code for handling driver 
+initializtion etc. will automatically come in FAT JAR.
+
+--> The MAJOR advantage of using a single JAR file for multiple projects in a company is that
+every project member will use the same tech-stack for their test automation purpose and 
+their will not be any problems when some members from a project leave the company because
+we could use members from other projects to work on the framework on the project where the 
+members left. So, this type of framework provided by these JAR files is called Common Automation
+Framework (CAF) as it is using same tech-stack for multiple projects.
+
+NOTE:
+- To store all these JARs we use a server called Nexus server which provides a repository to host all
+these JARS. Mostly Nexus servers are established as private and internal repositories within the companies.
+
+NOTE: 
+- The team which is creating generic frameworks containing code for different purposes
+like generic utilities for pages, driver initialization code etc. and create FAT JARS for different projects
+of a company  is called the R&D team or Core automation team or Test Automation Center 
+Of Excellence (TACOE).
+
+- The team(s) which are utilising these FAT JARs in different projects are called Regular project teams.
+
+ADVANTAGES of Joining the Core Automation Team or TACOE:
+- You will get chance to understand lot of technical things. 
+- You will create lot of utilities for other team members.
+
+DISADVANTAGES of Joining the Core Automation Team or TACOE:
+- You will lack the understanding to core business model of any project ( the domain knowledge ).
+
+ADVANTAGES of Joining the specific project team:
+- You get the domain knowledge of the project.
+
+DISADVANTAGES of Joining the specific project team:
+- You lack the technical understanding about how to design a framework from scratch because
+the framework is ready-made.
+
+- [IMPORTANT] Which plugin is used to generate a normal JAR?
+Ans: MAVEN JAR PLUGIN
+
+- [IMPORTANT] Which plugin is used to generate a FAT JAR?
+Ans: ASSEMBLY PLUGIN
+
+- [IMPORTANT] Which plugin is used to deploy a JAR to Nexus repository?
+Ans:  MAVEN DEPLOY PLUGIN
+
+- [IMPORTANT] Explain the maven life-cycle for a project.
+Ans: The maven life-cycle may contain 6-7 phases depending on requirements. Following are the phases:
+--> Create - Generate the test cases or the source code.
+--> Compile - Compile the test classes using compiler plugin
+--> Run - Run the tests using surefire plugin
+--> Package - package phase bundles the source code in a JAR file using Maven JAR plugin or ASSEMBLY  plugin.
+--> Install - Install phase copies the packaged JAR file into local maven repository (typically under .m2 folder) using maven
+install plugin
+--> Deploy - this phase is used to copy or deploy the JAR files from local to a repository like Nexus
+using maven DEPLOY plugin.
+
+- [VERY IMPORTANT-INTERVIEW] : Command to run the Nexus image on docker? Or Command to
+run Nexus on Docker containers?
+Ans: docker run -d -p 8081:8081 --name nexus sonatype/nexus3
+
+- [IMPORTANT] To create a FAT jar with the project JARs included you should add the assembly plugin
+with the following XML tag and value in the plugin section of pom.xml:
+--> <descriptorRef>jar-with-dependencies</descriptorRef> - Using this value only maven will create FAT JAR
+
+- Process to Login to the Nexu Repo:
+1. Run the repo using command : docker run -d -p 8081:8081 --name nexus sonatype/nexus3
+2. Login to the repo using username "admin" and temporary password retrieved from the file location /nexus-data/admin.password,
+    by clicking sign-in button
+    NOTE: Following are the steps to display the content(password) of the file /nexus-data/admin.password
+    --> Go to the terminal window where you ran the command to run nexus
+    --> Run command - docker ps -a to retrieve the container ID
+    --> Run the command - docker exec -it <container ID of the running docker container for Nexus> cat /nexus-data/admin.password
+    --> Copy the password displayed from the console/terminal
+   
+3.  Paste the temp. password in the password field and click signin on the login screen. 
+4. After login click next and provide a new password and confirm password of your choice, click next
+5. Click next.
+6. Click Agree to T&C button.
+7. Click enable anonymous access and click next.
+8. Click finish and you are now successfully logged into the Nexus Instance
+
+--> [IMPORTANT]Process to deploy the JAR file to nexus:
+1. First run the command - mvn clean install -DskipTests=true
+2. Then run the command - mvn deploy -DskipTests=true 
+NOTE: 
+- Remember while running deploy command DON'T Use CLEAN goal
+otherwise it will delete all the JAR files created under target folder, which we need to deploy
+to Nexus.
+- We generally skip tests using skipTests flag in the CLI because we just need to create the JAR file
+after successfully running all the tests
+
+--> [IMPORTANT] What happens when you try to deploy your JAR to Nexus repo without giving the 
+username and password to the repo under distribution management section you have added in your
+pom.xml?
+Ans : We will 401, unauthorized error

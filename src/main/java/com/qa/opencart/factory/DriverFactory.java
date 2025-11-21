@@ -146,7 +146,7 @@ public class DriverFactory {
 			break;
 		default:
 			System.out.println("Plz pass the right browser...." + browserName);
-			break;
+		    break;
 		}
 		getDriver().manage().window().maximize();
 		getDriver().manage().deleteAllCookies();

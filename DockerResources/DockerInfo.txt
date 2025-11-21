@@ -1,7 +1,7 @@
 [IMPORTANT]: Starting version 4.37.1 of Docker Desktop, windows server service MUST be enabled to
 install the software on your machine. Otherwise, it will not be installed. 
 
-[IMPORTANT]: If you experience 401 unauthorized issue while running docker commands using CLI login to the docker using
+[IMPORTANT]: If you experience 401 unauthorized issue while running docker commands using CLI, login to docker using
 command "docker login -u <username> -p <password>". Once logged in you will again be able to use the commands like
 docker run, docker ps etc.  
 NOTE: Doc showing how to use the option --password-stdin option using CMD: https://github.com/moby/moby/issues/35746 
@@ -28,7 +28,7 @@ configurations of OS, Browsers and other application. We could extract/install t
 on any physical machine and start working on them as a physical machine only. 
 
 2. Where do you download the images to create machines of different configurations?
-Ans: Docker has a centralized repository to down the images of different configurations called Docker hub.
+Ans: Docker has a centralized repository to download the images of different configurations called Docker hub.
 We could download these images from Docker hub and extract them later on our local machine to
 create the containers of different configurations.
 
@@ -176,5 +176,8 @@ use has to open a new terminal every time the run command is executed.
  it will delete all those containers which are not running using any image, along with the images.
  
  --> docker network ls - to list all the conatiners with their IDs, names etc.
+ 
  --> docker network rm <networkIdOrName> - to delete a specific docker network
- --> 
+ 
+ --> [IMPORTANT] : How to restart/reuse the same containers again?
+ Ans: Use the command - docker container start <CONTAINER_ID>

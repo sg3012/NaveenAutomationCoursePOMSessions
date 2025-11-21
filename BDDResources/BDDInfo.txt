@@ -1,0 +1,14 @@
+- BDD is not a framework, it's a process for developing applications. BDD should be used only for development purpose
+and not in testing phase as it was originally designed to be used in the development teams only. If BDD is being used 
+in test automation teams then it is WRONG.
+
+- 3 Amigos in BDD:
+   --> PO/BA
+   --> Dev
+   --> QA
+  
+  - BDD must be implemented and used by all the 3 Amigos constantly working together to build the software. If they
+  are not working together at any point of time then BDD is done WRONG.
+  
+  - In BDD approach we don't write test classes separately in our framework. All the test cases that we write in the test classes
+  in our standard POM framework are now part of the Step Definition file(s).
