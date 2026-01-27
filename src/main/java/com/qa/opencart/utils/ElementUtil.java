@@ -27,6 +27,10 @@ import io.qameta.allure.Step;
 //import customexception.FrameWorkException;
 
 public class ElementUtil {
+	
+	// [IMPORTANT-INTERVIEW]: Why do we create elementUtil or this
+	// generic utility containing already provided Selenium functions?
+	// ANS: 
 
 	// This class provided some generic functions
 	// to interact (perform user actions) on the
